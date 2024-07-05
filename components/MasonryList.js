@@ -3,10 +3,12 @@ import React from "react";
 import Pin from "./Pin";
 import pins from "../assets/data/pins";
 
-const MasonryList = ({ pins }) => {
+const MasonryList = ({ pins, ind }) => {
   return (
     <ScrollView>
-      <View style={styles.container}>
+      <View
+        style={[styles.container, ind ? { marginTop: 1 } : { marginTop: 29 }]}
+      >
         {/* FIRST COLUMN */}
         <View style={{ flex: 1 }}>
           {pins
@@ -35,7 +37,6 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: "row",
     backgroundColor: "white",
-    marginTop: 29,
   },
   separator: {
     marginVertical: 30,
