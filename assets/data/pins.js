@@ -2,11 +2,12 @@ export default [
   {
     id: "0",
     image:
+      // "https://images.unsplash.com/photo-1719831400714-5d4fe425cd8a?q=80&w=1887&h=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/0.jpeg",
     title: "notJust Dev Hoodie",
     owner: "Phuong",
     ownerImage:
-      "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/1.jpeg",
+      "https://images.unsplash.com/photo-1543205089-425bfeaf4d43?q=80&w=1933&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     followers: "874",
     likes: "3.5k",
     comments: "93",
@@ -51,6 +52,7 @@ export default [
   {
     id: "4",
     image:
+      // "https://plus.unsplash.com/premium_photo-1714023800301-83390690e1f0?q=80&w=1200&h=2300&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/4.jpeg",
     title: "White Tesla ",
     owner: "Phuong",
@@ -63,6 +65,7 @@ export default [
   {
     id: "5",
     image:
+      // "https://images.unsplash.com/photo-1719518384441-d12311be54c6?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/5.jpeg",
     title: "Hustle harder",
     owner: "Phuong",
@@ -121,4 +124,16 @@ export default [
     likes: "3.5k",
     comments: "93",
   },
+  // {
+  //   id: "10",
+  //   image:
+  //     "https://images.unsplash.com/photo-1719813916318-6d80019a0065?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   title: "Tesla Cybertruck",
+  //   owner: "Phuong",
+  //   ownerImage:
+  //     "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/1.jpeg",
+  //   followers: "874",
+  //   likes: "3.5k",
+  //   comments: "93",
+  // },
 ];
