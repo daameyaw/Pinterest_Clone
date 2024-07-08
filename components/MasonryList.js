@@ -5,7 +5,7 @@ import pins from "../assets/data/pins";
 
 const MasonryList = ({ pins, ind }) => {
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{ backgroundColor: "white" }}>
       <View
         style={[styles.container, ind ? { marginTop: 1 } : { marginTop: 29 }]}
       >
