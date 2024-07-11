@@ -1,24 +1,40 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Toast from "react-native-toast-message";
 
-import pins from "../assets/data/pins";
 import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import MasonryList from "../components/MasonryList";
+import LikeButton from "../components/LikeButton";
+import GamesPins from "../assets/data/GamesPins";
 
 const PinScreen = () => {
   const [ratio, setratio] = useState(1);
+  const [follow, setfollow] = useState(false);
+  const [save, setsave] = useState();
   const navigation = useNavigation();
   const route = useRoute();
   const insets = useSafeAreaInsets();
 
+  const pin = route.params?.pin;
+
   const pinId = route.params?.id;
-  const pin = pins.find((p) => p.id === pinId);
+  // const pin = pins.find((p) => p.id === pinId);
 
   useEffect(() => {
     if (pin?.image) {
@@ -29,21 +45,133 @@ const PinScreen = () => {
   function goBack() {
     navigation.goBack();
   }
+  const followToast = () => {
+    Toast.show({
+      type: "success",
+      text2: `Following ${pin.owner}`,
+    });
+  };
 
   if (!pin) {
     return <Text>Pin not found</Text>;
   }
 
+  function onFollow() {
+    setfollow(!follow);
+    if (!follow) {
+      Toast.show({
+        type: "success",
+        text1: `Following ${pin.owner}`,
+      });
+    }
+  }
+
+  function onSave() {
+    setsave(!save);
+    if (!save) {
+      Toast.show({
+        type: "success",
+        text1: `Saved`,
+      });
+    }
+  }
+
   return (
     <SafeAreaView style={{ backgroundColor: "black" }}>
       <StatusBar style="light" />
-      <View style={styles.root}>
-        <Image
-          source={{ uri: pin.image }}
-          style={[styles.image, { aspectRatio: ratio }]}
-        />
-        <Text style={styles.title}>{pin.title}</Text>
-      </View>
+      <ScrollView style={styles.root}>
+        <View className="border-b-[1px] border-gray-100 ">
+          <Image
+            source={{ uri: pin.image }}
+            style={[styles.image, { aspectRatio: ratio }]}
+          />
+          <Text style={styles.title}>{pin.title}</Text>
+
+          <View className="flex-row justify-between px-1 gap-5 items-center mb-4">
+            <View className="flex-row gap-2 ml-4 justify-center items-center">
+              <Image
+                source={{ uri: pin.ownerImage }}
+                style={{ borderRadius: 50, width: 50, height: 50 }}
+              />
+              <View className="">
+                <Text className="text-xl font-bold">{pin.owner}</Text>
+                <Text>{pin.followers} followers</Text>
+              </View>
+            </View>
+            <View className="flex-row justify-center items-center gap-2">
+              <TouchableOpacity
+                onPress={onFollow}
+                style={{
+                  backgroundColor: "#E0E0E0",
+                  padding: 15,
+                  borderRadius: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+                  {follow ? "Following" : "Follow"}
+                </Text>
+              </TouchableOpacity>
+              <View className="flex-row justify-between items-center   shadow-md">
+                <TouchableOpacity
+                  onPress={onSave}
+                  className="bg-red-400"
+                  style={{
+                    padding: 15,
+                    paddingHorizontal: 20,
+                    borderRadius: 20,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={{ fontSize: 16, fontWeight: "bold", color: "white" }}
+                  >
+                    {save ? "Saved" : "Save"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View className="p-3">
+          <View className="flex-row justify-between p-5">
+            <Text className="font-bold text-lg">{pin.comments} comments</Text>
+            <View className="flex-row justify-center items-center gap-3 ">
+              <Text className="text-lg font-bold">{pin.likes} </Text>
+              <LikeButton size={24} />
+              {/* <Pressable style={styles.heartBtn} onPress={onLike}>
+                <AntDesign name="hearto" size={24} color="black" />
+              </Pressable> */}
+            </View>
+          </View>
+          <View style={{ margin: 10, marginHorizontal: 20 }}>
+            <TextInput
+              style={{
+                borderWidth: 1,
+                borderColor: "#E0E0E0",
+                borderRadius: 20,
+                width: "100%", // Decreased width to 90%
+                padding: 13,
+                paddingHorizontal: 15,
+                marginBottom: 10,
+                fontWeight: "bold", // Added bold font weight
+                textAlign: "left",
+              }}
+              placeholder="Add a comment..."
+            />
+          </View>
+        </View>
+
+        <View className="border-t-[1px] border-gray-100 ">
+          <Text className="font-bold text-xl text-left p-5 pb-2">
+            More to explore
+          </Text>
+          <MasonryList ind={10} pins={GamesPins} />
+        </View>
+      </ScrollView>
+
       <Pressable
         onPress={goBack}
         style={[styles.backBtn, { top: insets.top + 20 }]}
@@ -75,5 +203,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 35,
   },
+  heartBtn: {
+    color: "red",
+  },
+
   backBtn: { position: "absolute", left: 10 },
 });

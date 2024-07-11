@@ -8,8 +8,8 @@ import StackNavigator from "./Stacks/StackNavigator";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import Toast from "react-native-toast-message";
-import { onAuthStateChanged } from "firebase/auth";
-import { FIREBASE_AUTH } from "./FirebaseConfig";
+// import { onAuthStateChanged } from "firebase/auth";
+// import { FIREBASE_AUTH } from "./FirebaseConfig";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import StartScreen from "./screens/StartScreen";
 import LoginScreen from "./screens/LoginScreen";
@@ -20,11 +20,11 @@ const Stack = createNativeStackNavigator();
 function App() {
   const [user, setUser] = React.useState(null);
 
-  React.useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      setUser(user);
-    });
-  }, []);
+  // React.useEffect(() => {
+  //   onAuthStateChanged(FIREBASE_AUTH, (user) => {
+  //     setUser(user);
+  //   });
+  // }, []);
   return (
     <>
       <Provider store={store}>

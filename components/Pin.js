@@ -2,6 +2,7 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import LikeButton from "./LikeButton";
 
 const Pin = ({ pin }) => {
   const [ratio, setratio] = useState(1);
@@ -17,7 +18,7 @@ const Pin = ({ pin }) => {
   }, [image]);
 
   function goToPinPage() {
-    navigation.navigate("PinScreen", { id });
+    navigation.navigate("PinScreen", { id, pin });
   }
 
   return (
@@ -29,9 +30,16 @@ const Pin = ({ pin }) => {
           }}
           style={[styles.image, { aspectRatio: ratio }]}
         />
-        <Pressable style={styles.heartBtn} onPress={onLike}>
-          <AntDesign name="hearto" size={16} color="black" />
-        </Pressable>
+        <LikeButton size={16} absolute={true} />
+        {/* {liked ? (
+          <Pressable style={styles.heartBtn} onPress={onLike}>
+            <AntDesign name="heart" size={24} color="red" />
+          </Pressable>
+        ) : (
+          <Pressable style={styles.heartBtn} onPress={onLike}>
+            <AntDesign name="hearto" size={16} color="black" />
+          </Pressable>
+        )} */}
       </View>
       <Text style={styles.title} numberOfLines={2}>
         {title}
@@ -57,13 +65,5 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     margin: 5,
     color: "#181818",
-  },
-  heartBtn: {
-    backgroundColor: "#D3CFD4",
-    position: "absolute",
-    bottom: 10,
-    right: 10,
-    padding: 5,
-    borderRadius: 50,
   },
 });

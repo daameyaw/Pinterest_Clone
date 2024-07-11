@@ -2,13 +2,21 @@ import React, { Component, useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
 import { AntDesign } from "@expo/vector-icons";
+import Toast from "react-native-toast-message";
 
 function LikeButton({ size, absolute }) {
   const [liked, setLiked] = useState(false);
 
   function onLike() {
     setLiked(!liked);
-    // onLike(); // simulate like action
+    if (!liked) {
+      Toast.show({
+        type: "success",
+        text1: `Liked`,
+      });
+    }
+
+    // onLike(); // simulate like actionP
   }
 
   return (
