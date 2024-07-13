@@ -12,6 +12,7 @@ const initialState = {
   birthdate: "",
   country: "",
   about: "",
+  createdPins: [],
 };
 
 export const stateSlice = createSlice({
@@ -42,6 +43,15 @@ export const stateSlice = createSlice({
     setProfile: (state, action) => {
       state.profileImage = action.payload;
     },
+    setPins: (state, action) => {
+      state.createdPins.push(action.payload);
+    },
+    addFollow: (state, action) => {
+      state.following++;
+    },
+    unfollow: (state, action) => {
+      state.following--;
+    },
   },
 });
 
@@ -53,7 +63,10 @@ export const {
   setUserGender,
   setUserName,
   setUserPassword,
+  setPins,
   setProfile,
+  addFollow,
+  unfollow,
 } = stateSlice.actions;
 
 export default stateSlice.reducer;
