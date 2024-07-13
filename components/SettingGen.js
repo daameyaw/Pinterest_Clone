@@ -3,10 +3,11 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-function SettingGen({ text, info, screenName }) {
+function SettingGen({ text, info, screenName = "" }) {
   const navigation = useNavigation();
 
   function goToScreen(screenName) {
+    if (screenName === "") return;
     navigation.navigate(screenName);
   }
 
