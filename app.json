@@ -4,10 +4,10 @@
     "slug": "Dream",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/Home.jpg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/Home.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
