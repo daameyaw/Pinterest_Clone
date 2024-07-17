@@ -117,12 +117,16 @@ export default function ProfileScreen() {
           <View className="flex-1 ">
             <View className=" flex-1 ">
               {createdPins.length === 0 ? (
-                <View className="items-center justify-center pt-[100px]  ">
-                  <View className="items-center justify-center">
+                <View className="items-center justify-center pt-[100px] w-full h-full  ">
+                  <Image
+                    style={{ width: 250, height: 250 }}
+                    source={require("../assets/empty.png")}
+                  />
+                  {/* <View className="items-center justify-center">
                     <Text className="items-center text-lg font-extrabold">
                       No pins found.
                     </Text>
-                  </View>
+                  </View> */}
                 </View>
               ) : (
                 <MasonryList pins={createdPins} />

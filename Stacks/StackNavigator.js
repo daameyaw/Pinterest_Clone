@@ -31,7 +31,7 @@ const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => (
   <Stack.Navigator>
-    {/* <Stack.Screen
+    <Stack.Screen
       name="Start"
       component={StartScreen}
       options={{
@@ -51,7 +51,7 @@ const StackNavigator = () => (
       options={{
         headerShown: false,
       }}
-    /> */}
+    />
     <Stack.Screen
       name="Pins"
       component={HomeScreen}

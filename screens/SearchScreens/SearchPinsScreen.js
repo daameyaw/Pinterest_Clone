@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { SafeAreaView, StyleSheet, TextInput, View } from "react-native";
+import { Image, SafeAreaView, StyleSheet, TextInput, View } from "react-native";
 import MasonryList from "../../components/MasonryList";
 // import pins from "../../assets/data/pins";
 import { AntDesign } from "@expo/vector-icons";
@@ -64,8 +64,23 @@ export default function SearchPinsScreen() {
             onChangeText={handleSearchInputChange}
           />
         </View>
+        {pins.length === 0 ? (
+          <View className="items-center justify-center  w-full h-full  ">
+            <Image
+              style={{ width: 350, height: 350 }}
+              source={require("../../assets/search.jpg")}
+            />
+            {/* <View className="items-center justify-center">
+                    <Text className="items-center text-lg font-extrabold">
+                      No pins found.
+                    </Text>
+                  </View> */}
+          </View>
+        ) : (
+          <MasonryList pins={pins} />
+        )}
 
-        <MasonryList pins={pins} />
+        {/* <MasonryList pins={pins} /> */}
       </SafeAreaView>
     </>
   );
