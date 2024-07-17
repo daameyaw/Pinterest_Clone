@@ -11,6 +11,9 @@ import {
   Platform,
   Image,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  PlatformColor,
+  ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
@@ -68,106 +71,125 @@ export default function LoginScreen() {
   //   navigation.navigate("Pins", { password, email });
   // };
   return (
-    <SafeAreaView>
-      <>
-        <View
-          style={{
-            marginTop: 50,
-            height: 100,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Image
-            source={require("../assets/Home.jpg")}
+    <KeyboardAvoidingView
+      className="flex-1 bg-white"
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.select({ ios: 60, android: 80 })}
+    >
+      <ScrollView>
+        <View>
+          <View
             style={{
-              width: 120,
-              height: 120,
-              borderRadius: 70,
-              resizeMode: "cover",
+              marginTop: 100,
+              height: 100,
+              justifyContent: "center",
+              alignItems: "center",
+              marginBottom: 90,
             }}
-          />
-        </View>
-        <View className="p-6 mt-20">
-          {/* <Text className="text-3xl w-96 mb-16">Sign in,Start Dreaming</Text> */}
-          <View className="absolute top-[35px] left-[40px] ">
-            <FontAwesome name="user" size={20} color="#ffba08" />
-          </View>
-          <TextInput
-            className="border-yellow-300 border-2 rounded-2xl pl-12 placeholder:text-md text-gray-400"
-            style={styles.input}
-            value={name}
-            onChangeText={setName}
-            placeholder="Name"
-            keyboardType="text"
-            autoCapitalize="none"
-            autoCompleteType="email"
-          />
-          <View className="absolute top-[93px] left-[40px] ">
-            <Fontisto name="email" size={20} color="#ffba08" />
-          </View>
-
-          <TextInput
-            className="border-yellow-300 border-2 rounded-2xl pl-12 placeholder:text-md text-gray-400"
-            style={styles.input}
-            value={email}
-            onChangeText={setEmail}
-            placeholder="Enter your email"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            autoCompleteType="email"
-          />
-
-          <View className="absolute top-[154px] left-[40px] ">
-            <Feather name="lock" size={20} color="#ffba08" />
-          </View>
-
-          <TextInput
-            className=" border-2  rounded-2xl pl-12 placeholder:text-md text-gray-400"
-            style={styles.input}
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Enter your password"
-            secureTextEntry
-            autoCompleteType="password"
-          />
-        </View>
-        <View className="px-4 py-4">
-          {loading ? (
-            <ActivityIndicator size="large" color="#edc531" />
-          ) : (
-            <TouchableOpacity
-              className=" rounded-xl"
-              disabled={!email || !password}
-              onPress={signUp}
+          >
+            <Image
+              source={require("../assets/Home.jpg")}
               style={{
-                backgroundColor: !email || !password ? "gray" : "#edc531",
-                width: "70%",
-                alignSelf: "center",
-                paddingVertical: 12,
-                justifyContent: "center",
+                width: 180,
+                height: 180,
+                borderRadius: 100,
+                resizeMode: "cover",
               }}
-            >
-              <Text
-                className="text-center"
-                style={{ color: "white", fontSize: 22, fontWeight: "bold" }}
+            />
+          </View>
+          <View className="p-6 ">
+            {/* <Text className="text-3xl w-96 mb-16">Sign in,Start Dreaming</Text> */}
+
+            <View className="mb-5">
+              <View style={styles.searchContainer}>
+                <View style={styles.icon}>
+                  <FontAwesome name="user" size={20} color="#ffba08" />
+                </View>
+                <TextInput
+                  className="  rounded-xl  placeholder:text-md text-gray-400"
+                  value={name}
+                  onChangeText={setName}
+                  placeholder="Name"
+                  keyboardType="text"
+                  autoCapitalize="none"
+                  autoCompleteType="email"
+                  style={styles.search}
+                />
+              </View>
+            </View>
+
+            <View className="mb-5">
+              <View style={styles.searchContainer}>
+                <View style={styles.icon}>
+                  <Fontisto name="email" size={20} color="#ffba08" />
+                </View>
+                <TextInput
+                  className="  rounded-xl  placeholder:text-md text-gray-400"
+                  value={email}
+                  onChangeText={setEmail}
+                  placeholder="Enter your email"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  autoCompleteType="email"
+                  style={styles.search}
+                />
+              </View>
+            </View>
+
+            <View>
+              <View style={styles.searchContainer}>
+                <View style={styles.icon}>
+                  <Feather name="lock" size={20} color="#ffba08" />
+                </View>
+                <TextInput
+                  className=" text-black  rounded-xl  placeholder:text-md"
+                  value={password}
+                  onChangeText={setPassword}
+                  placeholder="Enter your password"
+                  secureTextEntry
+                  autoCompleteType="password"
+                  style={styles.search}
+                />
+              </View>
+            </View>
+          </View>
+          <View className="px-4 py-4">
+            {loading ? (
+              <ActivityIndicator size="large" color="#edc531" />
+            ) : (
+              <TouchableOpacity
+                className=" rounded-xl"
+                disabled={!email || !password}
+                onPress={signUp}
+                style={{
+                  backgroundColor: !email || !password ? "gray" : "#edc531",
+                  width: "70%",
+                  alignSelf: "center",
+                  paddingVertical: 12,
+                  justifyContent: "center",
+                }}
               >
-                Sign up
+                <Text
+                  className="text-center"
+                  style={{ color: "white", fontSize: 22, fontWeight: "bold" }}
+                >
+                  Sign up
+                </Text>
+              </TouchableOpacity>
+            )}
+            <Text className="text-center mt-7 text-[15px]">
+              Already have an account?{" "}
+              <Text
+                onPress={() => navigation.navigate("Login")}
+                className="italic text-[17px]"
+              >
+                Log in
               </Text>
-            </TouchableOpacity>
-          )}
-          <Text className="text-center mt-7 text-[15px]">
-            Already have an account?{" "}
-            <Text
-              onPress={() => navigation.navigate("Login")}
-              className="italic text-[17px]"
-            >
-              Log in
             </Text>
-          </Text>
+          </View>
         </View>
-      </>
-    </SafeAreaView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -215,5 +237,35 @@ const styles = StyleSheet.create({
   },
   headerRight: {
     width: 24,
+  },
+  searchContainer: {
+    // backgroundColor: "white",
+    width: "100%",
+    borderColor: "white",
+    marginTop: 4,
+    marginBottom: 20,
+    padding: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    position: "relative",
+  },
+  search: {
+    position: "absolute",
+    width: "100%",
+    borderWidth: 1,
+    borderRadius: 5,
+    // borderColor: "#ddd",
+    borderColor: "gray",
+    backgroundColor: "#f1f2f6",
+    padding: 12,
+    fontSize: 16,
+    paddingHorizontal: 40,
+    color: "black",
+    marginLeft: 10,
+    zIndex: 0,
+  },
+  icon: {
+    marginLeft: 10,
+    zIndex: 1,
   },
 });

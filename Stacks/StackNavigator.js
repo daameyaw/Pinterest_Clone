@@ -23,6 +23,9 @@ import StartScreen from "../screens/StartScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
 import AdvancedSettingsScreen from "../screens/AdvancedSettingsScreen";
 import Chatbot from "../screens/Chatbot";
+import Dob from "../screens/Dob";
+import CountiesScreen from "../screens/CountiesScreen";
+import SearchPinsScreen from "../screens/SearchScreens/SearchPinsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +60,14 @@ const StackNavigator = () => (
       }}
     />
     <Stack.Screen
+      name="search"
+      component={SearchPinsScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+
+    <Stack.Screen
       name="Home"
       component={WelcomeScreen}
       options={{
@@ -82,6 +93,7 @@ const StackNavigator = () => (
       component={ProfileScreen}
       options={{
         headerShown: false,
+        cardStyle: { backgroundColor: "#fff" },
       }}
     />
     <Stack.Screen
@@ -195,6 +207,20 @@ const StackNavigator = () => (
     <Stack.Screen
       name="ChatAI"
       component={Chatbot}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Stack.Screen
+      name="Dob"
+      component={Dob}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Stack.Screen
+      name="Countries"
+      component={CountiesScreen}
       options={{
         headerShown: false,
       }}

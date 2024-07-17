@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-function SettingsGeneric({ text, screenName, padding }) {
+function SettingsGeneric({ text, screenName, padding, info = "", next }) {
   const navigation = useNavigation();
 
   function goToScreen(screenName) {
@@ -15,7 +15,13 @@ function SettingsGeneric({ text, screenName, padding }) {
       style={[styles.item, padding && { paddingHorizontal: padding }]}
     >
       <Text style={styles.itemText}>{text}</Text>
-      <AntDesign className="p-4" name="right" size={19} color="black" />
+      <View className="flex-row gap-2 items-center text-gray-200">
+        <Text className="text-gray-500">{info}</Text>
+
+        {!next && (
+          <AntDesign className="p-4" name="right" size={19} color="black" />
+        )}
+      </View>
     </TouchableOpacity>
   );
 }

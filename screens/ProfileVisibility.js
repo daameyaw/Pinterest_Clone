@@ -1,11 +1,11 @@
 import React from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { Platform, SafeAreaView, Text, View } from "react-native";
 import Header from "../components/Header";
 import SettingSwitch from "../components/SettingSwitch";
 
 export default function ProfileVisibility() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={Platform.OS === "android" && { marginTop: 45 }}>
       <Header title="Profile visibility" />
       <View className="p-4">
         <Text className="text-lg text-gray-700 font-semibold">

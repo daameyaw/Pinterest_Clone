@@ -13,12 +13,16 @@ const initialState = {
   country: "",
   about: "",
   createdPins: [],
+  unsplashPins: [],
 };
 
 export const stateSlice = createSlice({
   name: "appState",
   initialState,
   reducers: {
+    setPins: (state, action) => {
+      state.unsplashPins = action.payload;
+    },
     setUserName: (state, action) => {
       state.userName = action.payload;
     },
@@ -89,3 +93,5 @@ export const getAbout = (state) => state.appState.about;
 export const getId = (state) => state.appState.identifier;
 
 export const getProfile = (state) => state.appState.profileImage;
+
+export const getCreatedPins = (state) => state.appState.createdPins;

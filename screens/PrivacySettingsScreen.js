@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Platform,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -12,7 +13,7 @@ import SettingSwitch from "../components/SettingSwitch";
 
 export default function PrivacySettingsScreen() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={Platform.OS === "android" && { marginTop: 45 }}>
       <Header title="Privacy and data" />
       <ScrollView>
         <View className="p-4">

@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
+  Image,
+  ImageBackground,
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -13,13 +16,23 @@ import {
 import axios from "axios";
 import { isSpeakingAsync, speak, stop } from "expo-speech";
 import ChatBubble from "../components/ChatBubble";
+import Header from "../components/Header";
+import { Entypo, Ionicons } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
+import { getProfile } from "../reducers/appReducer";
+import { useNavigation } from "@react-navigation/native";
+
+const placeholderImage = require("../assets/empty2.jpg");
 
 export default function Chatbot() {
+  const profile = useSelector(getProfile);
+
   const [chat, setChat] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const navigation = useNavigation();
 
   const API_KEY = "AIzaSyAKO5xm26DgKh0N_r74_12T4qhjB0VVDX8";
 
@@ -37,7 +50,7 @@ export default function Chatbot() {
 
     try {
       const response = await axios.post(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`,
         {
           contents: updatedChat,
         }
@@ -50,7 +63,7 @@ export default function Chatbot() {
       if (modelResponse) {
         //Add model response
         const updatedChatWithModel = [
-          updatedChat,
+          ...updatedChat,
           {
             role: "model",
             parts: [{ text: modelResponse }],
@@ -89,43 +102,75 @@ export default function Chatbot() {
   );
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-      keyboardVerticalOffset={Platform.select({ ios: 60, android: 80 })}
-    >
-      <View style={styles.container}>
-        <Text style={styles.title}>Gemini Chatbot</Text>
-        <FlatList
-          data={chat}
-          renderItem={renderChatItem}
-          keyExtractor={(itemm, index) => index.toString()}
-          contentContainerStyle={styles.chatContainer}
-        />
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Type your message"
-            placeholderTextColor="#aaa"
-            value={userInput}
-            onChangeText={setUserInput}
-          />
-          <TouchableOpacity style={styles.button} onPress={handleUserInput}>
-            <Text style={styles.buttonText}>Send</Text>
-          </TouchableOpacity>
-        </View>
-        {loading && <ActivityIndicator style={styles.loading} color="#333" />}
-        {error && <Text style={styles.error}>{error}</Text>}
-      </View>
-    </KeyboardAvoidingView>
+    <>
+      <ImageBackground
+        className="flex-1"
+        style={styles.cardImage}
+        source={require("../assets/background2.jpg")}
+        // resizeMode="contain"
+      >
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.container}
+          //   keyboardVerticalOffset={Platform.select({ ios: 60, android: 80 })}
+        >
+          <View style={styles.container}>
+            <View className="bg-white pb-3">
+              <View className="mt-8 flex-row  items-center p-6 px-0 pb-0">
+                <TouchableOpacity
+                  onPress={() => navigation.goBack()}
+                  className="px-2"
+                >
+                  <Entypo name="chevron-left" size={38} color="black" />
+                </TouchableOpacity>
+                <View className="w-12 h-12  rounded-full">
+                  <Image
+                    className="w-full h-full rounded-full"
+                    source={profile ? { uri: profile } : placeholderImage}
+                  />
+                </View>
+                <Text className=" ml-5 text-xl font-bold">My AI</Text>
+              </View>
+            </View>
+            <FlatList
+              data={chat}
+              renderItem={renderChatItem}
+              keyExtractor={(itemm, index) => index.toString()}
+              contentContainerStyle={styles.chatContainer}
+            />
+            {loading && (
+              <ActivityIndicator style={styles.loading} color="#333" />
+            )}
+
+            <View
+              className="bg-white p-7 pt-1 flex items-center gap-2"
+              style={styles.inputContainer}
+            >
+              <TextInput
+                className="bg-gray-300 text-lg text-left items-center px-3 pb-1 py-2"
+                style={styles.input}
+                placeholder="Chat"
+                placeholderTextColor="#aaa"
+                value={userInput}
+                onChangeText={setUserInput}
+              />
+              <TouchableOpacity style={styles.button} onPress={handleUserInput}>
+                <Ionicons name="send" size={24} color="black" />
+              </TouchableOpacity>
+            </View>
+            {/* {error && <Text style={styles.error}>{error}</Text>} */}
+          </View>
+        </KeyboardAvoidingView>
+      </ImageBackground>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: "#f8f8f8",
+    // padding: 16,
+    backgroundColor: "transparent",
   },
 
   title: {
@@ -134,7 +179,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: "#333",
     marginTop: 40,
-    textAlign: "center",
+    // textAlign: "center",
   },
   chatContainer: {
     flexGrow: 1,
@@ -148,17 +193,13 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     height: "50",
-    marginRight: 10,
-    padding: 8,
-    borderColor: "#333",
-    borderWidth: 1,
+    // marginRight: 10,
+    // padding: 10,
     borderRadius: 25,
     color: "#333",
-    backgroundColor: "#fff",
   },
   button: {
     padding: 10,
-    backgroundColor: "#007AFF",
     borderRadius: 25,
   },
   buttonText: {
@@ -171,5 +212,15 @@ const styles = StyleSheet.create({
   error: {
     color: "red",
     marginTop: 10,
+  },
+  cardImage: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    // alignItems: "center",
+    filter: "grayscale(50%)",
+    // filter: "drop-shadow(8px 8px 10px gray)",
+    // opacity: 0.5,
   },
 });

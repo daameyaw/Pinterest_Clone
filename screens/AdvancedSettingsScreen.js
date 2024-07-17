@@ -1,12 +1,15 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Platform, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Header from "../components/Header";
 import SettingSwitch from "../components/SettingSwitch";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function AdvancedSettingsScreen() {
+  const insets = useSafeAreaInsets();
+
   return (
     <SafeAreaView>
-      <View className="p-4">
+      <View style={{ paddingTop: insets.top }} className="p-4">
         <Header title="Advanced settings" />
         <Text style={styles.sectionTitle}>Engagement settings</Text>
 

@@ -1,6 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
+import { getPins } from "../services/apiPins";
+import { setPins } from "../reducers/appReducer";
+import { useDispatch } from "react-redux";
 
 function WelcomeScreen() {
   const navigation = useNavigation();

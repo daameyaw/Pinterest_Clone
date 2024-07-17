@@ -135,7 +135,7 @@ export default function EditProfileScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
+      style={[styles.container, Platform.OS === "android" && { marginTop: 35 }]}
       keyboardVerticalOffset={Platform.select({ ios: 60, android: 80 })}
     >
       <View className="bg-white">
@@ -151,14 +151,22 @@ export default function EditProfileScreen() {
             onPress={() => closeEditing()}
             className="ml-auto"
             style={{
-              backgroundColor: !isChanged ? "#E0E0E0" : "#ffba08",
+              backgroundColor: !isChanged ? "#E0E0E0" : "black",
               padding: 15,
               borderRadius: 20,
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>Done</Text>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                color: !isChanged ? "black" : "white",
+              }}
+            >
+              Done
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -19,12 +19,16 @@ import { StatusBar } from "expo-status-bar";
 //eslint-disable-next-line
 import NavigationTabs from "../components/NavigationTabs";
 import {
+  getCreatedPins,
   getProfile,
   getUserFollowers,
   getUserFollowing,
   getUserName,
 } from "../reducers/appReducer";
 import { useSelector } from "react-redux";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import LikedPins from "./LikedPins";
+import CreatedPins from "./CreatedPins";
 
 const placeholderImage = require("../assets/empty2.jpg");
 
@@ -32,8 +36,9 @@ export default function ProfileScreen() {
   const userName = useSelector(getUserName);
 
   const followers = useSelector(getUserFollowers);
-
+  const createdPins = useSelector(getCreatedPins);
   const following = useSelector(getUserFollowing);
+  const Stack = createNativeStackNavigator();
 
   const profile = useSelector(getProfile);
   console.log(profile);
@@ -51,7 +56,7 @@ export default function ProfileScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <>
-        <ScrollView>
+        <ScrollView style={Platform.OS === "android" && { marginTop: 5 }}>
           <StatusBar style="dark" />
           <View style={styles.header}>
             <View style={styles.icons}></View>
@@ -61,26 +66,70 @@ export default function ProfileScreen() {
             />
             <Text style={styles.title}>{userName}</Text>
             <Text style={styles.subtitle}>
-              {" "}
               {followers} Followers | {following} Following
             </Text>
             <TouchableOpacity
               onPress={() => navigation.navigate("EditProfile")}
               style={{
-                backgroundColor: "#E0E0E0",
+                backgroundColor: "black",
                 padding: 15,
                 borderRadius: 20,
                 justifyContent: "center",
                 alignItems: "center",
               }}
             >
-              <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+              <Text
+                style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
+              >
                 Edit Profile
               </Text>
             </TouchableOpacity>
           </View>
+          {/* <TouchableOpacity onPress={() => navigation.navigate("Liked")}>
+            <Text>Liked</Text>
+          </TouchableOpacity>
 
-          <MasonryList pins={pins} />
+          <TouchableOpacity onPress={() => navigation.navigate("Created")}>
+            <Text>Created</Text>
+          </TouchableOpacity>
+ */}
+          {/* <View>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Liked"
+                component={LikedPins}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Created"
+                component={CreatedPins}
+                options={{
+                  headerShown: false,
+                }}
+              />
+            </Stack.Navigator>
+          </View> */}
+          <View className="text-center items-center  mt-7 pb-1  border-b-2 mx-auto ">
+            <Text className="text-lg font-bold">Created by you</Text>
+          </View>
+          <View className="flex-1 ">
+            <View className=" flex-1 ">
+              {createdPins.length === 0 ? (
+                <View className="items-center justify-center pt-[100px]  ">
+                  <View className="items-center justify-center">
+                    <Text className="items-center text-lg font-extrabold">
+                      No pins found.
+                    </Text>
+                  </View>
+                </View>
+              ) : (
+                <MasonryList pins={createdPins} />
+              )}
+            </View>
+          </View>
+
           <Pressable
             onPress={goBack}
             style={[styles.backBtn, { top: 16, padding: 5 }]}
@@ -102,6 +151,7 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: "white",
     marginTop: Platform.OS === "android" ? 30 : 0,
   },

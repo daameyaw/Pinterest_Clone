@@ -1,11 +1,11 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Platform, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Header from "../components/Header";
 import SettingSwitch from "../components/SettingSwitch";
 
 export default function SocialScreen() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={Platform.OS === "android" && { marginTop: 45 }}>
       <Header title="Social permissions and activity" />
       <View className="p-4">
         <Text className="text-lg text-gray-700 font-semibold">

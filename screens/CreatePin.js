@@ -10,15 +10,26 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import NavigationTabs from "../components/NavigationTabs";
 import Header from "../components/Header";
 import SettingsGeneric from "../components/SettingsGeneric";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile, setPins } from "../reducers/appReducer";
+import Toast from "react-native-toast-message";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CreatePin() {
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [isChanged, setIsChanged] = useState(false);
+
+  const navigation = useNavigation();
+  const profile = useSelector(getProfile);
+  const dispatch = useDispatch();
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -34,14 +45,47 @@ export default function CreatePin() {
     }
   };
 
-  function onSubmit() {}
+  const handleTitleChange = (text) => {
+    setTitle(text);
+    setIsChanged(true);
+    // Add any additional logic here
+  };
+
+  const handleDescriptionChange = (text) => {
+    setDescription(text);
+    setIsChanged(true);
+    // Add any additional logic here
+  };
+
+  function onSubmit() {
+    const newPin = {
+      id: Math.random().toString,
+      title,
+      description,
+      image,
+      ownerImage: profile ? profile : "",
+    };
+    console.log(newPin);
+    dispatch(setPins(newPin));
+
+    Toast.show({
+      type: "success",
+      text1: `Pin created successfully`,
+    });
+
+    navigation.navigate("Pins");
+  }
 
   return (
     <>
       <View className="mt-[50px]">
         <Header title="Create a Pin" />
       </View>
-      <KeyboardAvoidingView style={styles.Kcontainer} behavior="position">
+      <KeyboardAvoidingView
+        style={styles.Kcontainer}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        // keyboardVerticalOffset={Platform.select({ ios: 60, android: 80 })}
+      >
         <ScrollView>
           <View style={styles.container}>
             <Button
@@ -59,7 +103,7 @@ export default function CreatePin() {
                     <TextInput
                       className="border-none  border-gray-700 mb-8   placeholder:text-xl   font-bold"
                       value={title}
-                      onChangeText={setTitle}
+                      onChangeText={handleTitleChange}
                       placeholder="Tell everyone what your Pin is about"
                       style={styles.input}
                     />
@@ -68,8 +112,8 @@ export default function CreatePin() {
                     <Text className="font-bold mb-3">Description</Text>
                     <TextInput
                       className="border-none  border-gray-700 mb-8  placeholder:text-xl   font-bold"
-                      value={title}
-                      onChangeText={setTitle}
+                      value={description}
+                      onChangeText={handleDescriptionChange}
                       placeholder="Add a description to your Pin"
                       style={styles.input}
                     />
@@ -87,15 +131,18 @@ export default function CreatePin() {
                         width: "30%",
                         paddingVertical: 25,
                         // paddingHorizontal: 4,
-                        backgroundColor: "#E0E0E0",
+                        backgroundColor: !isChanged ? "#E0E0E0" : "black",
                         borderRadius: 100,
                         justifyContent: "center",
                         alignItems: "center",
                       }}
                     >
                       <Text
-                        className="text-white"
-                        style={{ fontSize: 16, fontWeight: "bold" }}
+                        className=""
+                        style={[
+                          { fontSize: 16, fontWeight: "bold" },
+                          !isChanged ? { color: "black" } : { color: "white" },
+                        ]}
                       >
                         Create Pin
                       </Text>

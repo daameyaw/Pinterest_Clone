@@ -14,9 +14,17 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import StartScreen from "./screens/StartScreen";
 import LoginScreen from "./screens/LoginScreen";
 import SignUp from "./screens/SignUp";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const Stack = createNativeStackNavigator();
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+    },
+  },
+});
 function App() {
   const [user, setUser] = React.useState(null);
 
@@ -27,26 +35,28 @@ function App() {
   // }, []);
   return (
     <>
-      <Provider store={store}>
-        <NavigationContainer>
-          <StackNavigator />
-        </NavigationContainer>
-        <Toast
-          position="bottom"
-          style={{ borderLeftColor: "pink" }}
-          contentContainerStyle={{ padding: 15 }}
-          text1Style={{
-            fontSize: 20,
-            fontWeight: "400",
-            paddingVertical: 5,
-          }}
-          text2Style={{
-            fontSize: 16,
-            paddingBottom: 10,
-          }}
-          bottomOffset={90}
-        />
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <NavigationContainer>
+            <StackNavigator />
+          </NavigationContainer>
+          <Toast
+            position="bottom"
+            style={{ borderLeftColor: "pink" }}
+            contentContainerStyle={{ padding: 15 }}
+            text1Style={{
+              fontSize: 20,
+              fontWeight: "400",
+              paddingVertical: 5,
+            }}
+            text2Style={{
+              fontSize: 16,
+              paddingBottom: 10,
+            }}
+            bottomOffset={90}
+          />
+        </Provider>
+      </QueryClientProvider>
     </>
   );
 }

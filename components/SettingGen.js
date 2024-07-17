@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-function SettingGen({ text, info, screenName = "" }) {
+function SettingGen({ text, info, screenName = "", next }) {
   const navigation = useNavigation();
 
   function goToScreen(screenName) {
@@ -20,7 +20,9 @@ function SettingGen({ text, info, screenName = "" }) {
       <View className="flex-row gap-2 items-center text-gray-200">
         <Text className="text-gray-500">{info}</Text>
 
-        <AntDesign className="p-4" name="right" size={19} color="black" />
+        {!next && (
+          <AntDesign className="p-4" name="right" size={19} color="black" />
+        )}
       </View>
     </TouchableOpacity>
   );

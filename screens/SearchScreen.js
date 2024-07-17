@@ -2,6 +2,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   ImageBackground,
@@ -14,56 +15,82 @@ import {
   View,
 } from "react-native";
 import NavigationTabs from "../components/NavigationTabs";
+import { getSearch } from "../services/apiPins";
+import { useQuery } from "@tanstack/react-query";
 
 const SearchScreen = () => {
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState("");
-  const [dreamboards, setDreamboards] = useState([]);
 
-  // Mock data for dreamboards
-  const mockDreamboards = [
-    { id: 1, name: "DreamBoard 1" },
-    { id: 2, name: "DreamBoard 2" },
-    { id: 3, name: "DreamBoard 3" },
-    // Add more dreamboards as needed
-  ];
+  // function handleSearch() {
+  //   navigation.navigate("search");
+  //   const {
+  //     isLoading,
+  //     data: Pins,
+  //     error,
+  //   } = useQuery({
+  //     queryKey: ["Search"],
+  //     queryFn: getSearch(searchQuery),
+  //   });
+  // }
 
-  // Filter dreamboards based on search query
-  const filteredDreamboards = dreamboards.filter((dreamboard) =>
-    dreamboard.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // const {
+  //   isLoading,
+  //   data: Pins,
+  //   error,
+  // } = useQuery({
+  //   queryKey: ["Search"],
+  //   queryFn: getSearch(searchQuery),
+  // });
+
+  // console.log(Pins?.length);
 
   // Function to handle search input change
-  const handleSearchInputChange = (query) => {
-    setSearchQuery(query);
-  };
 
   // Render each dreamboard item in the FlatList
-  const renderDreamboardItem = ({ item }) => (
-    <View style={styles.dreamboardItem}>
-      <Text>{item.name}</Text>
-    </View>
-  );
+  // const renderDreamboardItem = ({ item }) => (
+  //   <View style={styles.dreamboardItem}>
+  //     <Text>{item.name}</Text>
+  //   </View>
+  // );
 
   function navigateToSearchedScreen(query) {
     console.log(query);
     navigation.navigate("SearchResultScreen", { query: query });
-    setSearchQuery("");
   }
+
+  // if (isLoading) {
+  //   return (
+  //     <View style={styles.loadingContainer}>
+  //       <ActivityIndicator size="large" color="#000" />
+  //     </View>
+  //   );
+  // }
+
+  // if (error) {
+  //   return (
+  //     <View style={styles.loadingContainer}>
+  //       <Text>{error}</Text>
+  //     </View>
+  //   );
+  // }
 
   return (
     <SafeAreaView style={styles.container}>
       <>
-        {/* <View style={styles.searchContainer}>
-          <AntDesign name="search1" size={24} color="black" />
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.searchcontainer}
+          onPress={() => navigation.navigate("search")}
+        >
+          <View style={styles.search}>
+            <View>
+              <AntDesign name="search1" size={24} color="gray" />
+            </View>
+            <Text style={styles.searchText}>Search</Text>
+          </View>
+        </TouchableOpacity>
 
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search DreamBoard"
-            value={searchQuery}
-            onChangeText={handleSearchInputChange}
-          />
-        </View> */}
         <ScrollView contentContainerStyle={styles.scrollView}>
           {/* Ideas for you Section */}
           <Text style={styles.sectionTitle}>Ideas for you</Text>
@@ -87,7 +114,7 @@ const SearchScreen = () => {
                 source={require("../assets/mainImages/cuteIcons.jpg")}
                 style={styles.cardImage}
               >
-                <Text style={styles.cardText}>Cute Icons</Text>
+                <Text style={styles.cardText}>Cute Animals</Text>
               </ImageBackground>
             </TouchableOpacity>
           </View>
@@ -283,6 +310,33 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     paddingVertical: 10,
     backgroundColor: "#000",
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  searchcontainer: {
+    backgroundColor: "white",
+    marginTop: 8,
+    marginBottom: 15,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  search: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 8,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 5,
+    backgroundColor: "#f1f2f6",
+  },
+  searchText: {
+    marginLeft: 5,
+    color: "gray",
+    fontSize: 16,
+    fontWeight: "400",
   },
 });
 

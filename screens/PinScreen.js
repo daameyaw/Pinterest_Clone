@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Image,
   Pressable,
   ScrollView,
@@ -22,15 +23,31 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import MasonryList from "../components/MasonryList";
 import LikeButton from "../components/LikeButton";
 import GamesPins from "../assets/data/GamesPins";
+import { useDispatch } from "react-redux";
+import { addFollow, unfollow } from "../reducers/appReducer";
+import { getRandoms } from "../services/apiPins";
+import { useQuery } from "@tanstack/react-query";
 
 const PinScreen = () => {
+  const {
+    isLoading,
+    data: Pins,
+    error,
+  } = useQuery({
+    queryKey: ["Randoms"],
+    queryFn: getRandoms,
+  });
+
+  console.log(Pins?.length);
+
   const [ratio, setratio] = useState(1);
-  const [follow, setfollow] = useState(false);
+  const [follow, setfollow] = useState();
   const [save, setsave] = useState();
   const navigation = useNavigation();
   const route = useRoute();
   const insets = useSafeAreaInsets();
 
+  const dispatch = useDispatch();
   const pin = route.params?.pin;
 
   const pinId = route.params?.id;
@@ -59,9 +76,18 @@ const PinScreen = () => {
   function onFollow() {
     setfollow(!follow);
     if (!follow) {
+      dispatch(addFollow());
+
       Toast.show({
         type: "success",
         text1: `Following ${pin.owner}`,
+      });
+    }
+    if (follow) {
+      dispatch(unfollow());
+      Toast.show({
+        type: "success",
+        text1: `Unfollowing ${pin.owner}`,
       });
     }
   }
@@ -74,6 +100,21 @@ const PinScreen = () => {
         text1: `Saved`,
       });
     }
+  }
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text>{error}</Text>
+      </View>
+    );
   }
 
   return (
@@ -146,7 +187,7 @@ const PinScreen = () => {
               </Pressable> */}
             </View>
           </View>
-          <View style={{ margin: 10, marginHorizontal: 20 }}>
+          {/* <View style={{ margin: 10, marginHorizontal: 20 }}>
             <TextInput
               style={{
                 borderWidth: 1,
@@ -161,14 +202,14 @@ const PinScreen = () => {
               }}
               placeholder="Add a comment..."
             />
-          </View>
+          </View> */}
         </View>
 
         <View className="border-t-[1px] border-gray-100 ">
           <Text className="font-bold text-xl text-left p-5 pb-2">
             More to explore
           </Text>
-          <MasonryList ind={10} pins={GamesPins} />
+          <MasonryList ind={10} pins={Pins} />
         </View>
       </ScrollView>
 
@@ -205,6 +246,11 @@ const styles = StyleSheet.create({
   },
   heartBtn: {
     color: "red",
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   backBtn: { position: "absolute", left: 10 },

@@ -1,15 +1,22 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Platform, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Header from "../components/Header";
 import SettingsGeneric from "../components/SettingsGeneric";
 import SettingSwitch from "../components/SettingSwitch";
+import { getUserMail } from "../reducers/appReducer";
+import { useSelector } from "react-redux";
+import SettingGen from "../components/SettingGen";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function AccountScreen() {
+  const insets = useSafeAreaInsets();
+
   const navigation = useNavigation();
+  const email = useSelector(getUserMail);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ paddingTop: insets.top }}>
       <Header title="Account Management" />
 
       <View className="p-4">
@@ -25,8 +32,9 @@ export default function AccountScreen() {
           text="Personal Information"
           screenName="PersonalInfo"
         />
-        <SettingsGeneric text="Email Address" screenName="Email" />
-        <SettingsGeneric text="Password" screenName="PasswordScreen" />
+
+        <SettingsGeneric text="Email Address" screenName="Email" info={email} />
+        {/* <SettingsGeneric text="Password" screenName="PasswordScreen" /> */}
 
         <SettingSwitch
           text="App sounds"

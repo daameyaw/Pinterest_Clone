@@ -1,5 +1,5 @@
 import { useRoute } from "@react-navigation/native";
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import SiteDesignScreen from "./SiteDesignScreen";
 import pins from "../../assets/data/pins";
 import siteDesignPins from "../../assets/data/siteDesignPins";
@@ -10,10 +10,30 @@ import FlyerDesignPins from "../../assets/data/FlyerDesignPins";
 import WallpaperPins from "../../assets/data/WallpaperPins";
 import GamesPins from "../../assets/data/GamesPins";
 import HousePins from "../../assets/data/HousePins";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 export default function SearchResultScreen() {
+  const [loading, setLoading] = useState(true);
+
   const route = useRoute();
   const query = route.params?.query;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 6000);
+
+    // Cleanup the timeout if the component unmounts
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
 
   // const name = `${query.replaceAll("_", " ")}`;
 
@@ -42,3 +62,11 @@ export default function SearchResultScreen() {
     return <SiteDesignScreen name="Photography Camera" pins={CameraPins} />;
   }
 }
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
