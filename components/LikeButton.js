@@ -27,7 +27,7 @@ function LikeButton({ size, absolute }) {
           style={absolute && [styles.heartBtn]}
           onPress={onLike}
         >
-          <AntDesign name="heart" size={size} color="red" />
+          <AntDesign name="heart" size={size} color="#f5b352" />
         </Pressable>
       ) : (
         <Pressable
