@@ -25,9 +25,7 @@ export default function SettingsScreen() {
 
   const navigation = useNavigation();
 
-  function logOut() {
-    navigation.navigate("Login");
-  }
+  function logOut() {}
   return (
     <SafeAreaView style={Platform.OS === "android" && { marginTop: 45 }}>
       <ScrollView>
@@ -80,7 +78,7 @@ export default function SettingsScreen() {
 
         <TouchableOpacity
           className="p-[15px]"
-          onPress={logOut}
+          onPress={() => navigation.replace("Login")}
           style={[styles.item]}
         >
           <Text style={styles.itemText}>Log out</Text>

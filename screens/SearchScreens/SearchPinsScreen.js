@@ -1,5 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Image, SafeAreaView, StyleSheet, TextInput, View } from "react-native";
+import {
+  ActivityIndicator,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 import MasonryList from "../../components/MasonryList";
 // import pins from "../../assets/data/pins";
 import { AntDesign } from "@expo/vector-icons";
@@ -10,6 +17,8 @@ export default function SearchPinsScreen() {
   const [searchQuery, setSearchQuery] = useState("");
   const [pins, setPins] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [focused, setFocused] = useState(true);
 
   const handleSearchInputChange = (query) => {
     setSearchQuery(query);
@@ -17,6 +26,7 @@ export default function SearchPinsScreen() {
 
   const fetchPins = useCallback(async (query) => {
     if (query.trim() === "") return;
+    setIsLoading(true);
     try {
       const response = await fetch(
         `https://api.unsplash.com/search/collections?query=${query}&per_page=20&client_id=yLNUmzJFwd77yleiSU9sIj78fRAb7GyrAF2p1pCh80w`
@@ -39,6 +49,8 @@ export default function SearchPinsScreen() {
       }
     } catch (error) {
       setError(`Failed to fetch pins: ${error.message}`);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -48,7 +60,17 @@ export default function SearchPinsScreen() {
 
   const handleSearch = () => {
     fetchPins(searchQuery);
+    setFocused(false);
   };
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
+
   return (
     <>
       <SafeAreaView className="flex-1 bg-white">
@@ -56,6 +78,7 @@ export default function SearchPinsScreen() {
           <AntDesign name="search1" size={24} color="black" />
 
           <TextInput
+            autoFocus={focused}
             className=""
             onSubmitEditing={handleSearch}
             style={styles.searchInput}
@@ -65,9 +88,9 @@ export default function SearchPinsScreen() {
           />
         </View>
         {pins.length === 0 ? (
-          <View className="items-center justify-center  w-full h-full  ">
+          <View className="items-center justify-center  w-full h-full   ">
             <Image
-              style={{ width: 350, height: 350 }}
+              style={{ width: 250, height: 350 }}
               source={require("../../assets/search.jpg")}
             />
             {/* <View className="items-center justify-center">
@@ -91,6 +114,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
   searchContainer: {
     // padding: 10,
     // backgroundColor: "#F5F5F5",

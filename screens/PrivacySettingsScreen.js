@@ -10,8 +10,15 @@ import {
 } from "react-native";
 import Header from "../components/Header";
 import SettingSwitch from "../components/SettingSwitch";
+import Toast from "react-native-toast-message";
 
 export default function PrivacySettingsScreen() {
+  function clearCache() {
+    Toast.show({
+      type: "success",
+      text1: "Cache cleared",
+    });
+  }
   return (
     <SafeAreaView style={Platform.OS === "android" && { marginTop: 45 }}>
       <Header title="Privacy and data" />
@@ -56,7 +63,7 @@ export default function PrivacySettingsScreen() {
           Cache
         </Text>
 
-        <TouchableOpacity className="p-4 mb-28">
+        <TouchableOpacity onPress={clearCache} className="p-4 mb-28">
           <Text style={styles.itemText}>Clear app cache</Text>
         </TouchableOpacity>
       </ScrollView>

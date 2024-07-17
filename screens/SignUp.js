@@ -24,6 +24,7 @@ import {
   setUserName,
   setUserPassword,
 } from "../reducers/appReducer";
+import { StatusBar } from "expo-status-bar";
 
 const auth = FIREBASE_AUTH;
 
@@ -72,15 +73,16 @@ export default function LoginScreen() {
   // };
   return (
     <KeyboardAvoidingView
-      className="flex-1 bg-white"
+      className="flex-1 bg-black"
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.select({ ios: 60, android: 80 })}
     >
       <ScrollView>
+        <StatusBar style="dark" />
         <View>
           <View
             style={{
-              marginTop: 100,
+              marginTop: 150,
               height: 100,
               justifyContent: "center",
               alignItems: "center",
@@ -90,9 +92,9 @@ export default function LoginScreen() {
             <Image
               source={require("../assets/Home.jpg")}
               style={{
-                width: 180,
-                height: 180,
-                borderRadius: 100,
+                width: 220,
+                height: 220,
+                borderRadius: 150,
                 resizeMode: "cover",
               }}
             />
@@ -103,7 +105,7 @@ export default function LoginScreen() {
             <View className="mb-5">
               <View style={styles.searchContainer}>
                 <View style={styles.icon}>
-                  <FontAwesome name="user" size={20} color="#ffba08" />
+                  <FontAwesome name="user" size={20} color="#f5b352" />
                 </View>
                 <TextInput
                   className="  rounded-xl  placeholder:text-md text-gray-400"
@@ -121,7 +123,7 @@ export default function LoginScreen() {
             <View className="mb-5">
               <View style={styles.searchContainer}>
                 <View style={styles.icon}>
-                  <Fontisto name="email" size={20} color="#ffba08" />
+                  <Fontisto name="email" size={20} color="#f5b352" />
                 </View>
                 <TextInput
                   className="  rounded-xl  placeholder:text-md text-gray-400"
@@ -139,7 +141,7 @@ export default function LoginScreen() {
             <View>
               <View style={styles.searchContainer}>
                 <View style={styles.icon}>
-                  <Feather name="lock" size={20} color="#ffba08" />
+                  <Feather name="lock" size={20} color="#f5b352" />
                 </View>
                 <TextInput
                   className=" text-black  rounded-xl  placeholder:text-md"
@@ -155,14 +157,14 @@ export default function LoginScreen() {
           </View>
           <View className="px-4 py-4">
             {loading ? (
-              <ActivityIndicator size="large" color="#edc531" />
+              <ActivityIndicator size="large" color="black" />
             ) : (
               <TouchableOpacity
                 className=" rounded-xl"
                 disabled={!email || !password}
                 onPress={signUp}
                 style={{
-                  backgroundColor: !email || !password ? "gray" : "#edc531",
+                  backgroundColor: !email || !password ? "gray" : "black",
                   width: "70%",
                   alignSelf: "center",
                   paddingVertical: 12,
@@ -178,10 +180,10 @@ export default function LoginScreen() {
               </TouchableOpacity>
             )}
             <Text className="text-center mt-7 text-[15px]">
-              Already have an account?{" "}
+              Already have an account?
               <Text
                 onPress={() => navigation.navigate("Login")}
-                className="italic text-[17px]"
+                className="italic text-[17px] text-[#f5b352]"
               >
                 Log in
               </Text>
@@ -252,11 +254,10 @@ const styles = StyleSheet.create({
   search: {
     position: "absolute",
     width: "100%",
-    borderWidth: 1,
-    borderRadius: 5,
-    // borderColor: "#ddd",
-    borderColor: "gray",
-    backgroundColor: "#f1f2f6",
+    borderWidth: 0.5,
+    // borderRadius: 0,
+    borderColor: "#d1d1d1",
+    // backgroundColor: "#f1f2f6",
     padding: 12,
     fontSize: 16,
     paddingHorizontal: 40,

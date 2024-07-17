@@ -26,11 +26,19 @@ export default function SiteDesignScreen({ name, pins }) {
             >
               <AntDesign name="left" size={24} color="black" />
             </TouchableOpacity>
-            <TextInput
-              className="bg-gray-100 flex-1 pr-3 rounded-2xl placeholder:text-lg text-black text-left font-semibold"
-              style={styles.searchBar}
-              placeholder={name}
-            />
+            <TouchableOpacity
+              className="flex-1"
+              activeOpacity={0.5}
+              style={styles.searchcontainer}
+              onPress={() => navigation.navigate("search")}
+            >
+              <View style={styles.search}>
+                <View>
+                  {/* <AntDesign name="search1" size={24} color="gray" /> */}
+                </View>
+                <Text style={styles.searchText}>Search</Text>
+              </View>
+            </TouchableOpacity>
           </View>
 
           <MasonryList pins={pins} />
@@ -84,5 +92,27 @@ const styles = StyleSheet.create({
   iconLabel: {
     color: "white",
     textAlign: "center",
+  },
+  searchcontainer: {
+    backgroundColor: "white",
+    // marginTop: 8,
+    // marginBottom: 15,
+    // marginLeft: 10,
+    // marginRight: 10,
+  },
+  search: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 8,
+    // borderWidth: 1,
+    // borderColor: "#ddd",
+    borderRadius: 15,
+    // backgroundColor: "#f1f2f6",
+  },
+  searchText: {
+    marginLeft: 14,
+    color: "#908E9B",
+    fontSize: 16,
+    fontWeight: "600",
   },
 });

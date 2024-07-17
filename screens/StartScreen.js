@@ -22,13 +22,13 @@ export default function StartScreen() {
           style={styles.cardImage}
         />
         <View className="items-center">
-          <Text className="text-white  -mt-24  text-2xl font-bold ">
+          <Text className="text-[#f5b352]  -mt-24  text-3xl font-bold ">
             CRAFT YOUR DREAMS
           </Text>
         </View>
         <View className="text-white items-center   ">
           <TouchableOpacity
-            onPress={() => navigation.replace("Login")}
+            onPress={() => navigation.navigate("Login")}
             className="rounded-xl -mt-2"
             style={{
               width: "80%",

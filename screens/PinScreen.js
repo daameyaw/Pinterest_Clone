@@ -143,21 +143,23 @@ const PinScreen = () => {
               <TouchableOpacity
                 onPress={onFollow}
                 style={{
-                  backgroundColor: "#E0E0E0",
+                  backgroundColor: "black",
                   padding: 15,
                   borderRadius: 20,
                   justifyContent: "center",
                   alignItems: "center",
                 }}
               >
-                <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+                <Text
+                  style={{ fontSize: 16, fontWeight: "bold", color: "white" }}
+                >
                   {follow ? "Following" : "Follow"}
                 </Text>
               </TouchableOpacity>
               <View className="flex-row justify-between items-center   shadow-md">
                 <TouchableOpacity
                   onPress={onSave}
-                  className="bg-red-400"
+                  className="bg-[#f5b352]"
                   style={{
                     padding: 15,
                     paddingHorizontal: 20,
@@ -178,7 +180,7 @@ const PinScreen = () => {
         </View>
         <View className="p-3">
           <View className="flex-row justify-between p-5">
-            <Text className="font-bold text-lg">{pin.comments} comments</Text>
+            <Text className="font-bold text-lg"></Text>
             <View className="flex-row justify-center items-center gap-3 ">
               <Text className="text-lg font-bold">{pin.likes} </Text>
               <LikeButton size={24} />

@@ -327,16 +327,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 8,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 5,
-    backgroundColor: "#f1f2f6",
+    // borderWidth: 1,
+    // borderColor: "#ddd",
+    borderRadius: 15,
+    // backgroundColor: "#f1f2f6",
   },
   searchText: {
-    marginLeft: 5,
-    color: "gray",
+    marginLeft: 14,
+    color: "#908E9B",
     fontSize: 16,
-    fontWeight: "400",
+    fontWeight: "600",
   },
 });
 
