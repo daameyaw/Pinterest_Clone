@@ -84,7 +84,7 @@ export default function LoginScreen() {
       <>
         <View
           style={{
-            marginTop: 100,
+            marginTop: 150,
             height: 100,
             justifyContent: "center",
             alignItems: "center",
@@ -94,9 +94,9 @@ export default function LoginScreen() {
           <Image
             source={require("../assets/Home.jpg")}
             style={{
-              width: 180,
-              height: 180,
-              borderRadius: 100,
+              width: 220,
+              height: 220,
+              borderRadius: 150,
               resizeMode: "cover",
             }}
           />
@@ -107,7 +107,7 @@ export default function LoginScreen() {
           <View className="mb-5">
             <View style={styles.searchContainer}>
               <View style={styles.icon}>
-                <FontAwesome name="user" size={20} color="#ffba08" />
+                <FontAwesome name="user" size={20} color="#f5b352" />
               </View>
               <TextInput
                 className="  rounded-xl  placeholder:text-md text-gray-400"
@@ -125,7 +125,7 @@ export default function LoginScreen() {
           <View className="mb-5">
             <View style={styles.searchContainer}>
               <View style={styles.icon}>
-                <Fontisto name="email" size={20} color="#ffba08" />
+                <Fontisto name="email" size={20} color="#f5b352" />
               </View>
               <TextInput
                 className="  rounded-xl  placeholder:text-md text-gray-400"
@@ -143,7 +143,7 @@ export default function LoginScreen() {
           <View>
             <View style={styles.searchContainer}>
               <View style={styles.icon}>
-                <Feather name="lock" size={20} color="#ffba08" />
+                <Feather name="lock" size={20} color="#f5b352" />
               </View>
               <TextInput
                 className="  rounded-xl  placeholder:text-md text-gray-400"
@@ -159,14 +159,14 @@ export default function LoginScreen() {
         </View>
         <View className="px-4 py-4">
           {loading ? (
-            <ActivityIndicator size="large" color="#edc531" />
+            <ActivityIndicator size="large" color="black" />
           ) : (
             <TouchableOpacity
               className=" rounded-xl"
               disabled={!email || !password}
               onPress={handleLogin}
               style={{
-                backgroundColor: !email || !password ? "gray" : "#edc531",
+                backgroundColor: !email || !password ? "gray" : "black",
                 width: "70%",
                 alignSelf: "center",
                 paddingVertical: 12,
@@ -185,7 +185,7 @@ export default function LoginScreen() {
             Don't have an account?{" "}
             <Text
               onPress={() => navigation.replace("SignUp")}
-              className="italic text-[17px]"
+              className="italic text-[17px] text-[#f5b352]"
             >
               Sign up
             </Text>
