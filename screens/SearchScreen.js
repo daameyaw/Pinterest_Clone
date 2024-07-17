@@ -120,7 +120,7 @@ const SearchScreen = () => {
           </View>
 
           {/* Popular on Pinterest Section */}
-          <Text style={styles.sectionTitle}>Popular on Pinterest</Text>
+          <Text style={styles.sectionTitle}>Popular on DreamBoard</Text>
           <View style={styles.row}>
             <TouchableOpacity
               onPress={() => navigateToSearchedScreen("Wallpapers")}
