@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userName: "David",
+  userName: "",
   identifier: "",
   followers: 0,
   following: 0,
@@ -23,7 +23,7 @@ export const stateSlice = createSlice({
     setPins: (state, action) => {
       state.unsplashPins = action.payload;
     },
-    setUserName: (state, action) => {
+    setProfileName: (state, action) => {
       state.userName = action.payload;
     },
     setUserEmail: (state, action) => {
@@ -65,7 +65,7 @@ export const {
   setUserCountry,
   setUserEmail,
   setUserGender,
-  setUserName,
+  setProfileName,
   setUserPassword,
   setPins,
   setProfile,
