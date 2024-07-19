@@ -28,7 +28,7 @@ export default function NavigationTabs() {
     <SafeAreaView>
       <View
         style={Platform.OS === "android" && { paddingBottom: 25 }}
-        className=" pt-6   flex-row px-10 justify-around"
+        className=" pt-6   flex-row px-6 justify-around"
       >
         <TouchableOpacity
           onPress={handleHome}
