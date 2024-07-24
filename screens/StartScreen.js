@@ -28,7 +28,7 @@ export default function StartScreen() {
         </View>
         <View className="text-white items-center   ">
           <TouchableOpacity
-            onPress={() => navigation.navigate("Login")}
+            onPress={() => navigation.navigate("Login2")}
             className="rounded-xl -mt-2"
             style={{
               width: "80%",
@@ -50,7 +50,7 @@ export default function StartScreen() {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.replace("SignUp")}
+            onPress={() => navigation.navigate("SignUp2")}
             className="mt-6"
           >
             <Text className="text-white text-lg">Create Account</Text>
