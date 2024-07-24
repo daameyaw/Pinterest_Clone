@@ -73,7 +73,7 @@ export default function LoginScreen() {
   // };
   return (
     <KeyboardAvoidingView
-      className="flex-1 bg-black"
+      className="flex-1 bg-white"
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.select({ ios: 60, android: 80 })}
     >
@@ -105,7 +105,7 @@ export default function LoginScreen() {
             <View className="mb-5">
               <View style={styles.searchContainer}>
                 <View style={styles.icon}>
-                  <FontAwesome name="user" size={20} color="#f5b352" />
+                  <FontAwesome name="user" size={20} color="#ac6c15" />
                 </View>
                 <TextInput
                   className="  rounded-xl  placeholder:text-md text-gray-400"
@@ -123,7 +123,7 @@ export default function LoginScreen() {
             <View className="mb-5">
               <View style={styles.searchContainer}>
                 <View style={styles.icon}>
-                  <Fontisto name="email" size={20} color="#f5b352" />
+                  <Fontisto name="email" size={20} color="##ac6c15" />
                 </View>
                 <TextInput
                   className="  rounded-xl  placeholder:text-md text-gray-400"
@@ -141,7 +141,7 @@ export default function LoginScreen() {
             <View>
               <View style={styles.searchContainer}>
                 <View style={styles.icon}>
-                  <Feather name="lock" size={20} color="#f5b352" />
+                  <Feather name="lock" size={20} color="##ac6c15" />
                 </View>
                 <TextInput
                   className=" text-black  rounded-xl  placeholder:text-md"
@@ -183,7 +183,7 @@ export default function LoginScreen() {
               Already have an account?
               <Text
                 onPress={() => navigation.navigate("Login")}
-                className="italic text-[17px] text-[#f5b352]"
+                className="italic text-[17px] text-[#ac6c15]"
               >
                 Log in
               </Text>
