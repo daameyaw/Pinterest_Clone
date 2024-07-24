@@ -78,7 +78,7 @@ export default function SettingsScreen() {
 
         <TouchableOpacity
           className="p-[15px]"
-          onPress={() => navigation.replace("Login")}
+          onPress={() => navigation.navigate("Login")}
           style={[styles.item]}
         >
           <Text style={styles.itemText}>Log out</Text>
