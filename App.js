@@ -21,7 +21,7 @@ const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 0,
+      staleTime: 5 * 60 * 1000,
     },
   },
 });
@@ -35,7 +35,7 @@ const toastConfig = {
     <BaseToast
       {...props}
       position="top"
-      style={{ borderLeftColor: "black" }}
+      style={{ borderLeftColor: "#f5b352" }}
       contentContainerStyle={{ paddingHorizontal: 45, borderRadius: 40 }}
       text1Style={{
         fontSize: 20,
