@@ -38,8 +38,6 @@ export default function CreatePin() {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
@@ -59,13 +57,12 @@ export default function CreatePin() {
 
   function onSubmit() {
     const newPin = {
-      id: Math.random().toString,
+      id: Math.floor(Math.random() * 1000000), // Change to a whole number
       title,
       description,
       image,
       ownerImage: profile ? profile : "",
     };
-    console.log(newPin);
     dispatch(setPins(newPin));
 
     Toast.show({
@@ -73,7 +70,7 @@ export default function CreatePin() {
       text1: `Pin created successfully`,
     });
 
-    navigation.navigate("Pins");
+    navigation.navigate("ProfileScreen");
   }
 
   return (

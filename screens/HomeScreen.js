@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import NavigationTabs from "../components/NavigationTabs";
 import { useQuery } from "@tanstack/react-query";
 import { getPins } from "../services/apiPins";
+import { StatusBar } from "expo-status-bar";
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(true);
@@ -37,7 +38,7 @@ export default function HomeScreen() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#000" />
@@ -55,6 +56,8 @@ export default function HomeScreen() {
 
   return (
     <>
+      <StatusBar style="dark" />
+
       <MasonryList pins={Pins || pins} />
       <NavigationTabs />
     </>

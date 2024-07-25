@@ -26,6 +26,8 @@ import Chatbot from "../screens/Chatbot";
 import Dob from "../screens/Dob";
 import CountiesScreen from "../screens/CountiesScreen";
 import SearchPinsScreen from "../screens/SearchScreens/SearchPinsScreen";
+import Login2 from "../screens/Login2";
+import SignUp2 from "../screens/SignUp2";
 
 const Stack = createNativeStackNavigator();
 
@@ -38,7 +40,7 @@ const StackNavigator = () => (
         headerShown: false,
       }}
     />
-    <Stack.Screen
+    {/* <Stack.Screen
       name="Login"
       component={LoginScreen}
       options={{
@@ -51,7 +53,23 @@ const StackNavigator = () => (
       options={{
         headerShown: false,
       }}
+    /> */}
+    <Stack.Screen
+      name="Login2"
+      component={Login2}
+      options={{
+        headerShown: false,
+        gestureEnabled: false,
+      }}
     />
+    <Stack.Screen
+      name="SignUp2"
+      component={SignUp2}
+      options={{
+        headerShown: false,
+      }}
+    />
+
     <Stack.Screen
       name="Pins"
       component={HomeScreen}

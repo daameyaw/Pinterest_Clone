@@ -182,7 +182,7 @@ const PinScreen = () => {
           <View className="flex-row justify-between p-5">
             <Text className="font-bold text-lg"></Text>
             <View className="flex-row justify-center items-center gap-3 ">
-              <Text className="text-lg font-bold">{pin.likes} </Text>
+              <Text className="text-lg font-bold">{pin.likes}K</Text>
               <LikeButton size={24} />
               {/* <Pressable style={styles.heartBtn} onPress={onLike}>
                 <AntDesign name="hearto" size={24} color="black" />

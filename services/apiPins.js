@@ -23,7 +23,7 @@ export async function getPins() {
 
         return {
           id: photo.id,
-          likes: `${Math.round(Math.random() * 20) + 1}K`,
+          likes: `${Math.round(Math.random() * 20) + 1}`,
           title: firstTwoWords || "",
           owner: firstName || "",
           ownerImage: photo.user.profile_image.small,
@@ -99,7 +99,9 @@ export async function getSearch(query) {
         const firstName = photo.ownerName?.slice(0, 1);
         return {
           id: photo.id,
-          likes: photo.cover_photo.likes,
+          likes: `${Math.round(Math.random() * 20) + 1}`,
+
+          // likes: photo.cover_photo.likes,
           title: photo.user.title || "",
           owner: photo.user.username,
           ownerImage: photo.user.profile_image.small,

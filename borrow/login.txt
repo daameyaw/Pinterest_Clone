@@ -12,23 +12,14 @@ import {
 } from "react-native";
 import { FontAwesome6 } from "react-native-vector-icons";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { FIREBASE_AUTH } from "../FirebaseConfig";
+import { FIREBASE_AUTH } from "../../../Firebase/config";
+import { useNavigation } from "expo-router";
 import Toast from "react-native-toast-message";
-import { useNavigation } from "@react-navigation/native";
-import {
-  setUserEmail,
-  setProfileName,
-  setUserPassword,
-} from "../reducers/appReducer";
-import { useDispatch } from "react-redux";
-import { StatusBar } from "expo-status-bar";
+import { router } from "expo-router";
 
-const Login2 = () => {
-  const dispatch = useDispatch();
-  const [userName, setUserName] = useState("Juli");
-
-  const [email, setEmail] = useState("juli@gmail.com");
-  const [password, setPassword] = useState("juli@gmail");
+const LoginScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
@@ -79,16 +70,9 @@ const Login2 = () => {
         email,
         password
       );
-      // alert("Login successful");
-      dispatch(setProfileName(userName));
-      dispatch(setUserEmail(email));
-      dispatch(setUserPassword(password));
-
-      navigation.replace("Pins");
-
-      //   setEmail("");
-      //   setPassword("");
-      //   navigation.goBack();
+      setEmail("");
+      setPassword("");
+      navigation.goBack();
     } catch (error) {
       console.log("Sign In Failed: " + error);
       setLoading(false);
@@ -101,10 +85,9 @@ const Login2 = () => {
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.keyboardView}>
       <SafeAreaView style={styles.safeArea}>
-        <StatusBar style="light" />
         <View style={styles.container}>
           <Image
-            source={require("../assets/Login.png")}
+            source={require("../../../assets/signup_1.png")}
             style={styles.logo}
             contentFit="cover"
           />
@@ -113,20 +96,6 @@ const Login2 = () => {
             <Text style={styles.loginSubtitle}>
               Please enter your details to continue
             </Text>
-            <View style={styles.inputWrapper}>
-              <Text style={styles.inputLabel}>USERNAME</Text>
-              <TextInput
-                className="  rounded-xl  placeholder:text-md text-gray-400"
-                value={userName}
-                onChangeText={setUserName}
-                keyboardType="text"
-                autoCapitalize="none"
-                autoCompleteType="email"
-                style={styles.input}
-                selectionColor="#2ecc71"
-              />
-            </View>
-
             <View style={styles.inputWrapper}>
               <Text style={styles.inputLabel}>EMAIL</Text>
               <TextInput
@@ -188,7 +157,7 @@ const Login2 = () => {
               style={[
                 styles.loginButton,
                 {
-                  backgroundColor: validEmail ? "#f5b352" : "rgba(0,0,0,0.2)",
+                  backgroundColor: validEmail ? "#2ecc71" : "rgba(0,0,0,0.2)",
                 },
               ]}
             >
@@ -198,21 +167,11 @@ const Login2 = () => {
                 <Text style={styles.loginText}>Sign-in</Text>
               )}
             </TouchableOpacity>
-            <Text className="text-center mt-7 text-[15px]">
-              Don't have an account?
-              <Text
-                onPress={() => navigation.navigate("SignUp2")}
-                className="italic text-[17px] text-[#f5b352]"
-              >
-                Sign up
-              </Text>
-            </Text>
-
-            {/* <TouchableOpacity
+            <TouchableOpacity
               onPress={() => router.push("/auth/resetPassword")}
             >
               <Text style={styles.forgotPassword}>Forgot your password?</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
           </View>
         </View>
         <Toast />
@@ -221,7 +180,7 @@ const Login2 = () => {
   );
 };
 
-export default Login2;
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -243,7 +202,6 @@ const styles = StyleSheet.create({
     height: "30%",
   },
   loginContainer: {
-    marginTop: 15,
     width: "100%",
     alignItems: "center",
   },
@@ -288,7 +246,7 @@ const styles = StyleSheet.create({
     top: "25%",
   },
   loginButton: {
-    backgroundColor: "#f5b352",
+    backgroundColor: "#2ecc71",
     paddingVertical: 15,
     borderRadius: 8,
     alignItems: "center",

@@ -50,7 +50,7 @@ export default function ProfileScreen() {
   }
 
   function goToSettings() {
-    navigation.navigate("SettingsScreen");
+    navigation.replace("SettingsScreen");
   }
 
   return (

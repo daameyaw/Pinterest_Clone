@@ -21,6 +21,8 @@ import {
   getProfile,
   getUserName,
   setProfile,
+  setProfileAbout,
+  setProfileName,
   setUserName,
 } from "../reducers/appReducer";
 import { useDispatch, useSelector } from "react-redux";
@@ -55,11 +57,9 @@ export default function EditProfileScreen() {
 
     dispatch(setProfile(image));
 
-    console.log(profile);
-
     Toast.show({
       type: "success",
-      text1: `Edit Successfull`,
+      text1: `Edit Successful`,
     });
     navigation.goBack();
   }
@@ -72,14 +72,14 @@ export default function EditProfileScreen() {
   const handleNameChange = (text) => {
     setName(text);
     setIsChanged(true);
-    dispatch(setUserName(text));
+    dispatch(setProfileName(text));
     // Add any additional logic here
   };
 
   const handleAboutChange = (text) => {
     setAbout(text);
     setIsChanged(true);
-    dispatch(setAbout(text));
+    dispatch(setProfileAbout(text));
 
     // Add any additional logic here
   };
@@ -207,7 +207,7 @@ export default function EditProfileScreen() {
             value={name}
             onChangeText={handleNameChange}
             defaultValue={userName}
-            placeholder={userName}
+            // placeholder={userName}
           />
           <Text style={styles.inputLabel}>About</Text>
           <TextInput
@@ -250,7 +250,7 @@ export default function EditProfileScreen() {
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => setModalVisible(!modalVisible)}
                 >
-                  <Text style={styles.textStyle}>Hide Modal</Text>
+                  <Text style={styles.textStyle}>Close</Text>
                 </Pressable>
               </View>
             </View>

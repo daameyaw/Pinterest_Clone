@@ -12,12 +12,14 @@ import { setUserCountry } from "../reducers/appReducer";
 import Header from "../components/Header";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
+import { useNavigation } from "@react-navigation/native";
 
 const CountiesScreen = () => {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const insets = useSafeAreaInsets();
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -42,6 +44,7 @@ const CountiesScreen = () => {
       type: "success",
       text1: `Country Selected`,
     });
+    navigation.goBack();
   };
 
   const renderItem = ({ item }) => (

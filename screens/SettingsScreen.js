@@ -1,6 +1,7 @@
 import { AntDesign } from "@expo/vector-icons";
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   Image,
   Platform,
   SafeAreaView,
@@ -20,12 +21,24 @@ const placeholderImage = require("../assets/empty2.jpg");
 
 export default function SettingsScreen() {
   const profile = useSelector(getProfile);
+  const [isLoading, setLoading] = useState(false);
 
   const userName = useSelector(getUserName);
 
   const navigation = useNavigation();
 
-  function logOut() {}
+  function logOut() {
+    navigation.navigate("Login2");
+  }
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={Platform.OS === "android" && { marginTop: 45 }}>
       <ScrollView>
@@ -78,7 +91,7 @@ export default function SettingsScreen() {
 
         <TouchableOpacity
           className="p-[15px]"
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => logOut()}
           style={[styles.item]}
         >
           <Text style={styles.itemText}>Log out</Text>
@@ -159,5 +172,10 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

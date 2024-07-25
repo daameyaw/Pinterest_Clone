@@ -41,7 +41,7 @@ export const stateSlice = createSlice({
     setUserCountry: (state, action) => {
       state.country = action.payload;
     },
-    setAbout: (state, action) => {
+    setProfileAbout: (state, action) => {
       state.about = action.payload;
     },
     setProfile: (state, action) => {
@@ -61,6 +61,7 @@ export const stateSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
+  setProfileAbout,
   setUserBdate,
   setUserCountry,
   setUserEmail,

@@ -106,8 +106,8 @@ export default function Chatbot() {
       <ImageBackground
         className="flex-1"
         style={styles.cardImage}
-        source={require("../assets/background2.jpg")}
-        // resizeMode="contain"
+        source={require("../assets/ai3.png")}
+        resizeMode="contain"
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -155,7 +155,7 @@ export default function Chatbot() {
                 onChangeText={setUserInput}
               />
               <TouchableOpacity style={styles.button} onPress={handleUserInput}>
-                <Ionicons name="send" size={24} color="black" />
+                <Ionicons name="send" size={24} color="#f5b352" />
               </TouchableOpacity>
             </View>
             {/* {error && <Text style={styles.error}>{error}</Text>} */}
@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     // alignItems: "center",
     filter: "grayscale(50%)",
+    backgroundColor: "white",
     // filter: "drop-shadow(8px 8px 10px gray)",
     // opacity: 0.5,
   },

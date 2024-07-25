@@ -6,9 +6,11 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { useDispatch } from "react-redux";
 import { setUserBdate } from "../reducers/appReducer";
 import Toast from "react-native-toast-message";
+import { useNavigation } from "@react-navigation/native";
 export default function Dob() {
   const insets = useSafeAreaInsets();
   const [date, setDate] = useState(new Date());
+  const navigation = useNavigation();
 
   const dispatch = useDispatch();
   const [mode, setMode] = useState("date");
@@ -36,6 +38,7 @@ export default function Dob() {
     });
 
     dispatch(setUserBdate(formattedDate));
+    navigation.goBack();
   }
   return (
     <SafeAreaView style={{ paddingTop: insets.top }}>

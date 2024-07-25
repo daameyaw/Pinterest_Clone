@@ -25,6 +25,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { ProgressBar } from "react-native-paper";
 import { useDispatch } from "react-redux";
+import { StatusBar } from "expo-status-bar";
 
 const SignUp2 = () => {
   const dispatch = useDispatch();
