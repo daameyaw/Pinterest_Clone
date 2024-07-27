@@ -180,7 +180,9 @@ const PinScreen = () => {
         </View>
         <View className="p-3">
           <View className="flex-row justify-between p-5">
-            <Text className="font-bold text-lg"></Text>
+            <TouchableOpacity>
+              <Text className="font-bold text-lg">3 comments</Text>
+            </TouchableOpacity>
             <View className="flex-row justify-center items-center gap-3 ">
               <Text className="text-lg font-bold">{pin.likes}K</Text>
               <LikeButton size={24} />
