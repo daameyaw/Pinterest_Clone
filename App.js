@@ -15,6 +15,7 @@ import StartScreen from "./screens/StartScreen";
 import LoginScreen from "./screens/LoginScreen";
 import SignUp from "./screens/SignUp";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const Stack = createNativeStackNavigator();
 
@@ -56,14 +57,16 @@ function App() {
   // }, []);
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          <NavigationContainer>
-            <StackNavigator />
-          </NavigationContainer>
-          <Toast config={toastConfig} />
-        </Provider>
-      </QueryClientProvider>
+      <GestureHandlerRootView>
+        <QueryClientProvider client={queryClient}>
+          <Provider store={store}>
+            <NavigationContainer>
+              <StackNavigator />
+            </NavigationContainer>
+            <Toast config={toastConfig} />
+          </Provider>
+        </QueryClientProvider>
+      </GestureHandlerRootView>
     </>
   );
 }
