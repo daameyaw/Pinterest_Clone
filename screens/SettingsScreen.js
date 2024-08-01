@@ -17,11 +17,13 @@ import Header from "../components/Header";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
 import { getProfile, getUserName } from "../reducers/appReducer";
 import { useSelector } from "react-redux";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 const placeholderImage = require("../assets/empty2.jpg");
 
 export default function SettingsScreen() {
   const profile = useSelector(getProfile);
   const [isLoading, setLoading] = useState(false);
+  const insets = useSafeAreaInsets();
 
   const userName = useSelector(getUserName);
 
@@ -40,7 +42,7 @@ export default function SettingsScreen() {
   }
 
   return (
-    <SafeAreaView style={Platform.OS === "android" && { marginTop: 45 }}>
+    <SafeAreaView style={{ paddingTop: insets.top }}>
       <ScrollView>
         {/* Header */}
         <Header title="Your Account" />

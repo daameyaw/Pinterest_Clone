@@ -21,6 +21,7 @@ import { Entypo, Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import { getProfile } from "../reducers/appReducer";
 import { useNavigation } from "@react-navigation/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const placeholderImage = require("../assets/empty2.jpg");
 
@@ -33,6 +34,8 @@ export default function Chatbot() {
   const [error, setError] = useState(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
+  // style={{ paddingTop: insets.top }
 
   const API_KEY = "AIzaSyAKO5xm26DgKh0N_r74_12T4qhjB0VVDX8";
 
@@ -55,7 +58,6 @@ export default function Chatbot() {
           contents: updatedChat,
         }
       );
-      console.log("Gemini Pro API Response:", response.data);
 
       const modelResponse =
         response.data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
@@ -106,7 +108,7 @@ export default function Chatbot() {
       <ImageBackground
         className="flex-1"
         style={styles.cardImage}
-        source={require("../assets/ai3.png")}
+        source={require("../assets/ai4.jpg")}
         resizeMode="contain"
       >
         <KeyboardAvoidingView
@@ -114,9 +116,9 @@ export default function Chatbot() {
           style={styles.container}
           //   keyboardVerticalOffset={Platform.select({ ios: 60, android: 80 })}
         >
-          <View style={styles.container}>
-            <View className="bg-white pb-3">
-              <View className="mt-8 flex-row  items-center p-6 px-0 pb-0">
+          <View style={[styles.container, { paddingTop: insets.top }]}>
+            <View className="bg-gray-100 pb-3">
+              <View className=" flex-row  items-center p-6 px-0 pb-0">
                 <TouchableOpacity
                   onPress={() => navigation.goBack()}
                   className="px-2"
@@ -143,7 +145,7 @@ export default function Chatbot() {
             )}
 
             <View
-              className="bg-white p-7 pt-1 flex items-center gap-2"
+              className="bg-gray-100 p-7 pt-1 flex items-center gap-2"
               style={styles.inputContainer}
             >
               <TextInput
@@ -170,7 +172,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // padding: 16,
-    backgroundColor: "transparent",
+    backgroundColor: "white",
   },
 
   title: {

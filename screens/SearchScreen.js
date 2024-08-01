@@ -17,9 +17,12 @@ import {
 import NavigationTabs from "../components/NavigationTabs";
 import { getSearch } from "../services/apiPins";
 import { useQuery } from "@tanstack/react-query";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const SearchScreen = () => {
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
+
   const [searchQuery, setSearchQuery] = useState("");
 
   // function handleSearch() {
@@ -55,7 +58,6 @@ const SearchScreen = () => {
   // );
 
   function navigateToSearchedScreen(query) {
-    console.log(query);
     navigation.navigate("SearchResultScreen", { query: query });
   }
 
@@ -76,7 +78,7 @@ const SearchScreen = () => {
   // }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { paddingTop: insets.top }]}>
       <>
         <TouchableOpacity
           activeOpacity={0.5}

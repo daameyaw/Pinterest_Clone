@@ -10,7 +10,10 @@ import {
   Platform,
   ActivityIndicator,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 // import { Image } from "expo-image";
 import { FontAwesome, FontAwesome6 } from "react-native-vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -45,6 +48,7 @@ const SignUp2 = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [validPassword, setValidPassword] = useState(0);
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
 
   const steps = [
     {
@@ -388,7 +392,7 @@ const SignUp2 = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { paddingTop: insets.top }]}>
       <StatusBar style="dark" />
 
       <KeyboardAvoidingView

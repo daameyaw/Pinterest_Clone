@@ -20,7 +20,6 @@ export default function EmailScreen() {
   const navigation = useNavigation();
   const address = useSelector(getUserMail);
   const [email, setEmail] = useState(address);
-  console.log(address);
 
   const handleEmailChange = (text) => {
     setEmail(text);

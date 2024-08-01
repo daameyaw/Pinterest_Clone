@@ -23,7 +23,6 @@ export default function PasswordScreen() {
   const [isConfirmPasswordWrong, setConfirmPasswordWrong] = useState(false);
   const insets = useSafeAreaInsets();
 
-  console.log(userPassword);
   const handlePasswordChange = (text) => {
     if (password !== userPassword) {
       setCurrentWrong(true);

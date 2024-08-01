@@ -12,6 +12,7 @@ import MasonryList from "../../components/MasonryList";
 import { AntDesign } from "@expo/vector-icons";
 import { getPins, getSearch } from "../../services/apiPins";
 import { useQuery } from "@tanstack/react-query";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function SearchPinsScreen() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -45,7 +46,6 @@ export default function SearchPinsScreen() {
           };
         });
         setPins(formattedData);
-        console.log(formattedData);
       }
     } catch (error) {
       setError(`Failed to fetch pins: ${error.message}`);
@@ -70,10 +70,14 @@ export default function SearchPinsScreen() {
       </View>
     );
   }
+  const insets = useSafeAreaInsets();
 
   return (
     <>
-      <SafeAreaView className="flex-1 bg-white">
+      <SafeAreaView
+        style={{ paddingTop: insets.top }}
+        className="flex-1 bg-white"
+      >
         <View style={styles.searchContainer}>
           <AntDesign name="search1" size={24} color="black" />
 

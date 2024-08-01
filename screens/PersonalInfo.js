@@ -9,13 +9,16 @@ import {
   getUserGender,
   getUserMail,
 } from "../reducers/appReducer";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function PersonalInfo() {
+  const insets = useSafeAreaInsets();
+
   const bDate = useSelector(getUserBDate);
   const country = useSelector(getUserCountry);
   const gender = useSelector(getUserGender);
   return (
-    <SafeAreaView style={Platform.OS === "android" && { marginTop: 35 }}>
+    <SafeAreaView style={{ paddingTop: insets.top }}>
       <Header title="Personal information" />
       <View className="p-4">
         <Text className="text-lg text-gray-400 font-semibold">

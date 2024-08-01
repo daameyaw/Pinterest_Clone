@@ -29,7 +29,9 @@ export async function getPins() {
           ownerImage: photo.user.profile_image.small,
           image: photo.urls.regular,
           followers: `${Math.round(Math.random() * 100) + 1}K`,
-          comments: `${Math.round(Math.random() * 100) + 1}`,
+          // comments: `${Math.round(Math.random() * 100) + 1}`,
+          link: photo.links.html,
+          comments: [],
         };
       });
       // console.log(formattedData);
@@ -66,7 +68,8 @@ export async function getRandoms() {
           ownerImage: photo.user.profile_image.small,
           image: photo.urls.regular,
           followers: `${Math.round(Math.random() * 100) + 1}K`,
-          comments: `${Math.round(Math.random() * 100) + 1}`,
+          // comments: `${Math.round(Math.random() * 100) + 1}`,
+          comments: [],
         };
       });
       console.log(formattedData);
@@ -108,6 +111,7 @@ export async function getSearch(query) {
           image: photo.cover_photo.urls.regular,
           // followers: `${Math.round(Math.random() * 100) + 1}K`,
           // comments: `${Math.round(Math.random() * 100) + 1}`,
+          comments: [],
         };
       });
 

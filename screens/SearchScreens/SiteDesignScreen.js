@@ -12,12 +12,19 @@ import {
 } from "react-native";
 import MasonryList from "../../components/MasonryList";
 import NavigationTabs from "../../components/NavigationTabs";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function SiteDesignScreen({ name, pins }) {
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
+  // style={{ paddingTop: insets.top }}
+
   return (
     <>
-      <ScrollView contentContainerStyle={{ backgroundColor: "white" }}>
+      <ScrollView
+        style={{ paddingTop: insets.top }}
+        contentContainerStyle={{ backgroundColor: "white" }}
+      >
         <View className="bg-white my-8">
           <View className="  bg-white flex-row items-center gap-5 my-1 mr-5 ml-[0.5px]">
             <TouchableOpacity

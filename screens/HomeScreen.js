@@ -16,9 +16,12 @@ import NavigationTabs from "../components/NavigationTabs";
 import { useQuery } from "@tanstack/react-query";
 import { getPins } from "../services/apiPins";
 import { StatusBar } from "expo-status-bar";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(true);
+  const insets = useSafeAreaInsets();
+
   const {
     isLoading,
     data: Pins,
@@ -28,7 +31,6 @@ export default function HomeScreen() {
     queryFn: getPins,
   });
 
-  console.log(Pins?.length);
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);

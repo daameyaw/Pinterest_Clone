@@ -22,6 +22,7 @@ import {
 } from "../reducers/appReducer";
 import { useDispatch } from "react-redux";
 import { StatusBar } from "expo-status-bar";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Login2 = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const Login2 = () => {
   const [loading, setLoading] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
   const [validPassword, setValidPassword] = useState(0);
+  const insets = useSafeAreaInsets();
 
   const navigation = useNavigation();
   const showToast = () => {
@@ -100,7 +102,7 @@ const Login2 = () => {
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.keyboardView}>
-      <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView style={[styles.safeArea, { paddingTop: insets.top }]}>
         <StatusBar style="light" />
         <View style={styles.container}>
           <Image

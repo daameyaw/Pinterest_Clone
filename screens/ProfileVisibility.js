@@ -2,10 +2,13 @@ import React from "react";
 import { Platform, SafeAreaView, Text, View } from "react-native";
 import Header from "../components/Header";
 import SettingSwitch from "../components/SettingSwitch";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ProfileVisibility() {
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaView style={Platform.OS === "android" && { marginTop: 45 }}>
+    <SafeAreaView style={{ paddingTop: insets.top }}>
       <Header title="Profile visibility" />
       <View className="p-4">
         <Text className="text-lg text-gray-700 font-semibold">

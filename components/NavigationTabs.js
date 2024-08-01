@@ -17,7 +17,6 @@ export default function NavigationTabs() {
     navigation.navigate("SearchScreen");
   }
   function handleHome() {
-    console.log("Home");
     navigation.navigate("Pins");
   }
   function handleChat() {

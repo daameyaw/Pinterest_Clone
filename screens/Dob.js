@@ -9,6 +9,7 @@ import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
 export default function Dob() {
   const insets = useSafeAreaInsets();
+  // style={{ paddingTop: insets.top }
   const [date, setDate] = useState(new Date());
   const navigation = useNavigation();
 
@@ -30,7 +31,6 @@ export default function Dob() {
     const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(
       dateConvert
     );
-    console.log(formattedDate);
 
     Toast.show({
       type: "success",

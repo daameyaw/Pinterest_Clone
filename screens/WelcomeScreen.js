@@ -9,11 +9,9 @@ import { useDispatch } from "react-redux";
 function WelcomeScreen() {
   const navigation = useNavigation();
   function handleSignUp() {
-    console.log("sign up");
     navigation.navigate("SignUp");
   }
   function handleLogIn() {
-    console.log("sign up");
     navigation.navigate("Login");
   }
 

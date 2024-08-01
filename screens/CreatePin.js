@@ -62,6 +62,7 @@ export default function CreatePin() {
       description,
       image,
       ownerImage: profile ? profile : "",
+      comments: [],
     };
     dispatch(setPins(newPin));
 

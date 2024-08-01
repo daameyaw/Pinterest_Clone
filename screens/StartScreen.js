@@ -9,52 +9,60 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function StartScreen() {
+  const insets = useSafeAreaInsets();
+
   const navigation = useNavigation();
   return (
-    <View className="flex-1 bg-black">
+    <View className="flex-1  bg-black">
       <StatusBar style="light" />
       <View className=" flex-1   p-10 mb-64">
-        <Image
-          resizeMode="contain"
-          source={require("../assets/Home.jpg")}
-          style={styles.cardImage}
-        />
-        <View className="items-center">
-          <Text className="text-[#f5b352]  -mt-24  text-3xl font-bold ">
-            CRAFT YOUR DREAMS
-          </Text>
+        <View className="-mb-10">
+          <Image
+            resizeMode="contain"
+            source={require("../assets/Home.jpg")}
+            style={styles.cardImage}
+          />
         </View>
-        <View className="text-white items-center   ">
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Login2")}
-            className="rounded-xl -mt-2"
-            style={{
-              width: "80%",
-              alignSelf: "center",
-              paddingVertical: 12,
-              justifyContent: "center",
-              backgroundColor: "white",
-            }}
-          >
-            <Text
+
+        <View className="gap-5">
+          <View className="items-center ">
+            <Text className="text-[#f5b352]    text-3xl font-bold ">
+              CRAFT YOUR DREAMS
+            </Text>
+          </View>
+          <View className="text-white items-center   ">
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Login2")}
+              className="rounded-xl "
               style={{
-                fontSize: 22,
-                textAlign: "center",
-                color: "black",
+                width: "80%",
+                alignSelf: "center",
+                paddingVertical: 12,
+                justifyContent: "center",
+                backgroundColor: "white",
               }}
             >
-              Log in
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={{
+                  fontSize: 22,
+                  textAlign: "center",
+                  color: "black",
+                }}
+              >
+                Log in
+              </Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => navigation.navigate("SignUp2")}
-            className="mt-6"
-          >
-            <Text className="text-white text-lg">Create Account</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("SignUp2")}
+              className="mt-6"
+            >
+              <Text className="text-white text-lg">Create Account</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>

@@ -29,6 +29,7 @@ import { useSelector } from "react-redux";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LikedPins from "./LikedPins";
 import CreatedPins from "./CreatedPins";
+import MasonryList2 from "../components/MasonryList2";
 
 const placeholderImage = require("../assets/empty2.jpg");
 
@@ -41,7 +42,6 @@ export default function ProfileScreen() {
   const Stack = createNativeStackNavigator();
 
   const profile = useSelector(getProfile);
-  console.log(profile);
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
 
@@ -54,7 +54,7 @@ export default function ProfileScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { paddingTop: insets.top }]}>
       <>
         <ScrollView style={Platform.OS === "android" && { marginTop: 5 }}>
           <StatusBar style="dark" />
@@ -129,7 +129,7 @@ export default function ProfileScreen() {
                   </View> */}
                 </View>
               ) : (
-                <MasonryList pins={createdPins} />
+                <MasonryList2 pins={createdPins} />
               )}
             </View>
           </View>

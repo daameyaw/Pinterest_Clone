@@ -11,8 +11,11 @@ import {
 import Header from "../components/Header";
 import SettingSwitch from "../components/SettingSwitch";
 import Toast from "react-native-toast-message";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function PrivacySettingsScreen() {
+  const insets = useSafeAreaInsets();
+
   function clearCache() {
     Toast.show({
       type: "success",
@@ -20,7 +23,7 @@ export default function PrivacySettingsScreen() {
     });
   }
   return (
-    <SafeAreaView style={Platform.OS === "android" && { marginTop: 45 }}>
+    <SafeAreaView style={{ paddingTop: insets.top }}>
       <Header title="Privacy and data" />
       <ScrollView>
         <View className="p-4">

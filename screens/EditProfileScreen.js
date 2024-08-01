@@ -36,6 +36,7 @@ import {
 } from "@expo/vector-icons";
 import Toast from "react-native-toast-message";
 import * as ImagePicker from "expo-image-picker";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const placeholderImage = require("../assets/empty2.jpg");
 
@@ -47,11 +48,11 @@ export default function EditProfileScreen() {
   const [isChanged, setIsChanged] = useState(false);
   const [image, setImage] = useState();
   const profile = useSelector(getProfile);
+  const insets = useSafeAreaInsets();
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  console.log(userName);
   function closeEditing() {
     if (isChanged === false) return;
 
@@ -135,7 +136,11 @@ export default function EditProfileScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={[styles.container, Platform.OS === "android" && { marginTop: 35 }]}
+      style={[
+        styles.container,
+        { paddingTop: insets.top },
+        Platform.OS === "android" && { marginTop: 35 },
+      ]}
       keyboardVerticalOffset={Platform.select({ ios: 60, android: 80 })}
     >
       <View className="bg-white">

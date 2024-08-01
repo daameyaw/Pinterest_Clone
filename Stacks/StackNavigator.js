@@ -28,6 +28,7 @@ import CountiesScreen from "../screens/CountiesScreen";
 import SearchPinsScreen from "../screens/SearchScreens/SearchPinsScreen";
 import Login2 from "../screens/Login2";
 import SignUp2 from "../screens/SignUp2";
+import PinScreen2 from "../screens/PinScreen2";
 
 const Stack = createNativeStackNavigator();
 
@@ -99,6 +100,14 @@ const StackNavigator = () => (
         headerShown: false,
       }}
     />
+    <Stack.Screen
+      name="PinScreen2"
+      component={PinScreen2}
+      options={{
+        headerShown: false,
+      }}
+    />
+
     <Stack.Screen
       name="CreatePins"
       component={CreatePin}

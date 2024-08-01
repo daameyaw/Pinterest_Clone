@@ -52,7 +52,6 @@ export default function LoginScreen() {
     setLoading(true);
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response);
       alert("Login successful");
       navigation.replace("Pins");
       dispatch(setUserName(userName));
@@ -77,6 +76,7 @@ export default function LoginScreen() {
   // };
   return (
     <KeyboardAvoidingView
+      style={{ paddingTop: insets.top }}
       className="flex-1 bg-white"
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.select({ ios: 60, android: 80 })}
