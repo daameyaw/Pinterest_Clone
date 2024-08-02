@@ -30,7 +30,7 @@ export default function SearchPinsScreen() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://api.unsplash.com/search/collections?query=${query}&per_page=20&client_id=yLNUmzJFwd77yleiSU9sIj78fRAb7GyrAF2p1pCh80w`
+        `https://api.unsplash.com/search/collections?query=${query}&per_page=30&client_id=yLNUmzJFwd77yleiSU9sIj78fRAb7GyrAF2p1pCh80w`
       );
       const result = await response.json();
       const data = result.results;

@@ -76,6 +76,7 @@ const StackNavigator = () => (
       component={HomeScreen}
       options={{
         headerShown: false,
+        gestureEnabled: false,
       }}
     />
     <Stack.Screen

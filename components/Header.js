@@ -9,7 +9,7 @@ export default function Header({ title }) {
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={[styles.header, { paddingTop: insets.top }]}>
+    <View style={[styles.header]}>
       <AntDesign
         onPress={() => navigation.goBack()}
         name="arrowleft"

@@ -40,9 +40,10 @@ export default function SettingsScreen() {
       </View>
     );
   }
+  // Platform.OS === "android" && { marginTop: 45 }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ paddingTop: insets.top + 10 }}>
       <ScrollView>
         {/* Header */}
         <Header title="Your Account" />

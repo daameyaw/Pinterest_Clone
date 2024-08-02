@@ -1,7 +1,7 @@
 export async function getPins() {
   try {
     const response = await fetch(
-      `https://api.unsplash.com/photos/?per_page=25&client_id=yLNUmzJFwd77yleiSU9sIj78fRAb7GyrAF2p1pCh80w`
+      `https://api.unsplash.com/photos/?per_page=30&client_id=yLNUmzJFwd77yleiSU9sIj78fRAb7GyrAF2p1pCh80w`
     );
     const data = await response.json();
 

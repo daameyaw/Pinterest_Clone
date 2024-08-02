@@ -28,8 +28,8 @@ const Login2 = () => {
   const dispatch = useDispatch();
   const [userName, setUserName] = useState("");
 
-  const [email, setEmail] = useState("juli@gmail.com");
-  const [password, setPassword] = useState("juli@gmail");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
