@@ -117,8 +117,8 @@ export default function Chatbot() {
           //   keyboardVerticalOffset={Platform.select({ ios: 60, android: 80 })}
         >
           <View style={[styles.container, { paddingTop: insets.top }]}>
-            <View className="bg-gray-100 pb-3">
-              <View className=" flex-row  items-center p-6 px-0 pb-0">
+            <View className="bg-white pb-3 border-b-[1px]  border-gray-200">
+              <View className=" flex-row   items-center p-6 px-0 pb-2">
                 <TouchableOpacity
                   onPress={() => navigation.goBack()}
                   className="px-2"

@@ -43,6 +43,7 @@ export default function SearchPinsScreen() {
             owner: photo.user.username,
             ownerImage: photo.user.profile_image.small,
             image: photo.cover_photo.urls.regular,
+            comments: [],
           };
         });
         setPins(formattedData);
@@ -75,7 +76,7 @@ export default function SearchPinsScreen() {
   return (
     <>
       <SafeAreaView
-        style={{ paddingTop: insets.top }}
+        // style={{ paddingTop: insets.top }}
         className="flex-1 bg-white"
       >
         <View style={styles.searchContainer}>

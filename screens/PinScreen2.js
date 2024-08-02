@@ -83,7 +83,7 @@ const onShare = async (link) => {
   try {
     const result = await Share.share({
       message: "Look at this... 👀",
-      url: link,
+      url: "https://www.pinterest.com/",
       title: "Share with your friends...😊",
     });
     if (result.action === Share.sharedAction) {

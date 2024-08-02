@@ -78,7 +78,7 @@ const SearchScreen = () => {
   // }
 
   return (
-    <SafeAreaView style={[styles.container, { paddingTop: insets.top }]}>
+    <SafeAreaView style={[styles.container]}>
       <>
         <TouchableOpacity
           activeOpacity={0.5}

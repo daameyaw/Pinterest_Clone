@@ -120,6 +120,7 @@ const PinScreen = () => {
   const textInputRef = useRef(null);
   const profile = useSelector(getProfile);
   const [comment, setComment] = useState("");
+  const [isChanged, setIsChanged] = useState(false);
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -156,10 +157,6 @@ const PinScreen = () => {
 
   function uploadComment(text) {
     setComment("");
-    Toast.show({
-      type: "success",
-      text1: `✅`,
-    });
 
     pin.comments.push(comment);
     setIsOpen(false);
@@ -202,6 +199,11 @@ const PinScreen = () => {
         text1: `Unfollowing ${pin.owner}`,
       });
     }
+  }
+
+  function handleCommentsChange(text) {
+    setComment(text);
+    setIsChanged(true);
   }
 
   function onSave() {
@@ -287,7 +289,7 @@ const PinScreen = () => {
   //BOTTOME SHEET
 
   return (
-    <SafeAreaView style={{ backgroundColor: "black", paddingTop: insets.top }}>
+    <SafeAreaView style={{ backgroundColor: "black" }}>
       <StatusBar style="light" />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -494,7 +496,7 @@ const PinScreen = () => {
               <View className=" flex-1">
                 {pin.comments.length > 0 ? (
                   pin.comments.map((comment) => (
-                    <View className="p-4 ">
+                    <View key={Math.random()} className="p-4 ">
                       <View className="">
                         <View className="flex-row gap-3 items-center">
                           <View className="w-12 h-12  rounded-full">
@@ -520,19 +522,19 @@ const PinScreen = () => {
                     </View>
                   ))
                 ) : (
-                  <View className="flex-1   items-center justify-center text-center">
-                    <Text>
+                  <View className="flex-1 px-3   items-center justify-center text-center">
+                    <Text className="text-[15px] text-gray-700 font-bold">
                       Share a feedback ask a question or give a high five
                     </Text>
                   </View>
                 )}
               </View>
 
-              <View className=" mx-4 mb-6 flex-row justify-between items-center bg-white border-2 rounded-full">
-                <View>
+              <View className=" mx-4 mb-6 flex-row justify-between items-center bg-white border-[1px] border-gray-100 rounded-full">
+                <View className="pt-2">
                   <TextInput
                     value={comment}
-                    onChangeText={setComment}
+                    onChangeText={handleCommentsChange}
                     style={{
                       padding: 12,
                       paddingHorizontal: 15,
@@ -549,7 +551,7 @@ const PinScreen = () => {
                     <FontAwesome
                       name="arrow-circle-up"
                       size={30}
-                      color="black"
+                      color={!isChanged ? "black" : "#f5b352"}
                     />
                   </TouchableOpacity>
                 </View>

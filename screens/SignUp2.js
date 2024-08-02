@@ -9,6 +9,7 @@ import {
   FlatList,
   Platform,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import {
   SafeAreaView,
@@ -400,64 +401,66 @@ const SignUp2 = () => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
       >
-        <View style={{ flexGrow: 1 }}>
-          <Text style={styles.progressText}>
-            Step {step + 1} of {steps.length}
-          </Text>
-          <ProgressBar
-            progress={(step + 1) / steps.length}
-            color="#f5b352"
-            style={styles.progressBar}
-          />
-          <View style={{ flex: 1, justifyContent: "space-between" }}>
-            <View style={{ flex: 1, gap: 20 }}>
-              <View style={styles.headerWrapper}>
-                <Text style={styles.title}>{steps[step].title}</Text>
-                <TouchableOpacity onPress={handleBack} disabled={step === 0}>
-                  <FontAwesome
-                    name="arrow-left"
-                    size={24}
-                    color={step === 0 ? "rgba(0,0,0,0.2)" : "#f5b352"}
-                  />
-                </TouchableOpacity>
-              </View>
+        <ScrollView>
+          <View style={{ flexGrow: 1 }}>
+            <Text style={styles.progressText}>
+              Step {step + 1} of {steps.length}
+            </Text>
+            <ProgressBar
+              progress={(step + 1) / steps.length}
+              color="#f5b352"
+              style={styles.progressBar}
+            />
+            <View style={{ flex: 1, justifyContent: "space-between" }}>
+              <View style={{ flex: 1, gap: 20 }}>
+                <View style={styles.headerWrapper}>
+                  <Text style={styles.title}>{steps[step].title}</Text>
+                  <TouchableOpacity onPress={handleBack} disabled={step === 0}>
+                    <FontAwesome
+                      name="arrow-left"
+                      size={24}
+                      color={step === 0 ? "rgba(0,0,0,0.2)" : "#f5b352"}
+                    />
+                  </TouchableOpacity>
+                </View>
 
-              <View style={styles.formWrapper}>{steps[step].fields}</View>
-              {step === 1 && showDatePicker && (
-                <DateTimePicker
-                  mode="date"
-                  display="spinner"
-                  value={dob}
-                  onChange={(event, selectedDate) => {
-                    if (selectedDate) {
-                      setDob(selectedDate);
-                    }
-                  }}
-                  textColor="#333333"
-                  maximumDate={new Date(2005, 11, 31)}
-                />
-              )}
+                <View style={styles.formWrapper}>{steps[step].fields}</View>
+                {step === 1 && showDatePicker && (
+                  <DateTimePicker
+                    mode="date"
+                    display="spinner"
+                    value={dob}
+                    onChange={(event, selectedDate) => {
+                      if (selectedDate) {
+                        setDob(selectedDate);
+                      }
+                    }}
+                    textColor="#333333"
+                    maximumDate={new Date(2005, 11, 31)}
+                  />
+                )}
+              </View>
+            </View>
+            <View style={styles.buttonWrapper}>
+              <TouchableOpacity
+                disabled={!valid || loading}
+                style={[
+                  styles.nextButton,
+                  { backgroundColor: valid ? "#f5b352" : "rgba(0,0,0,0.2)" },
+                ]}
+                onPress={handleNext}
+              >
+                {loading ? (
+                  <ActivityIndicator size="small" color="white" />
+                ) : (
+                  <Text style={styles.buttonText}>
+                    {step === steps.length - 1 ? "Finish" : "Next"}
+                  </Text>
+                )}
+              </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.buttonWrapper}>
-            <TouchableOpacity
-              disabled={!valid || loading}
-              style={[
-                styles.nextButton,
-                { backgroundColor: valid ? "#f5b352" : "rgba(0,0,0,0.2)" },
-              ]}
-              onPress={handleNext}
-            >
-              {loading ? (
-                <ActivityIndicator size="small" color="white" />
-              ) : (
-                <Text style={styles.buttonText}>
-                  {step === steps.length - 1 ? "Finish" : "Next"}
-                </Text>
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

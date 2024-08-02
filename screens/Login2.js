@@ -26,7 +26,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Login2 = () => {
   const dispatch = useDispatch();
-  const [userName, setUserName] = useState("Juli");
+  const [userName, setUserName] = useState("");
 
   const [email, setEmail] = useState("juli@gmail.com");
   const [password, setPassword] = useState("juli@gmail");

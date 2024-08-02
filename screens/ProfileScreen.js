@@ -19,6 +19,7 @@ import { StatusBar } from "expo-status-bar";
 //eslint-disable-next-line
 import NavigationTabs from "../components/NavigationTabs";
 import {
+  getAbout,
   getCreatedPins,
   getProfile,
   getUserFollowers,
@@ -42,6 +43,7 @@ export default function ProfileScreen() {
   const Stack = createNativeStackNavigator();
 
   const profile = useSelector(getProfile);
+  const about = useSelector(getAbout);
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
 
@@ -65,6 +67,7 @@ export default function ProfileScreen() {
               style={styles.image}
             />
             <Text style={styles.title}>{userName}</Text>
+            <Text style={styles.about}>{about}</Text>
             <Text style={styles.subtitle}>
               {followers} Followers | {following} Following
             </Text>
@@ -174,6 +177,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     margin: 10,
   },
+  about: {
+    fontSize: 16,
+    // fontWeight: "bold",
+    margin: 5,
+  },
+
   image: {
     width: 200,
     aspectRatio: 1,

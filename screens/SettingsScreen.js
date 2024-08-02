@@ -42,13 +42,13 @@ export default function SettingsScreen() {
   }
 
   return (
-    <SafeAreaView style={{ paddingTop: insets.top }}>
+    <SafeAreaView>
       <ScrollView>
         {/* Header */}
         <Header title="Your Account" />
         {/* Profile Section */}
         <TouchableOpacity
-          onPress={() => navigation.navigate("ProfileScreen")}
+          // onPress={() => navigation.navigate("ProfileScreen")}
           style={styles.profileSection}
         >
           <Image
@@ -59,7 +59,7 @@ export default function SettingsScreen() {
             <Text style={styles.profileName}>{userName}</Text>
             <Text style={styles.profileAction}>View profile</Text>
           </View>
-          <AntDesign className="p-4" name="right" size={19} color="black" />
+          {/* <AntDesign className="p-4" name="right" size={19} color="black" /> */}
         </TouchableOpacity>
 
         {/* Settings Section */}
