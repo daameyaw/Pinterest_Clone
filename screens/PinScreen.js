@@ -63,6 +63,7 @@ const downloadImage = async (url) => {
       FileSystem.documentDirectory + "downloaded_image.jpg"
     );
     return uri;
+    Alert.alert("Success", "Image saved to media library!");
   } catch (error) {
     console.error(error);
     Alert.alert("Download Failed", "Failed to download the image.");
