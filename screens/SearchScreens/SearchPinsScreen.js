@@ -71,7 +71,7 @@ export default function SearchPinsScreen() {
       </View>
     );
   }
-  // const insets = useSafeAreaInsets();
+  const insets = useSafeAreaInsets();
 
   return (
     <>
