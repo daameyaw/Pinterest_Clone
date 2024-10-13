@@ -98,17 +98,17 @@ export default function SearchPinsScreen() {
               style={{ width: 250, height: 350 }}
               source={require("../../assets/search.jpg")}
             />
-            {/* <View className="items-center justify-center">
-                    <Text className="items-center text-lg font-extrabold">
-                      No pins found.
-                    </Text>
-                  </View> */}
+            <View className="items-center justify-center">
+              <Text className="items-center text-lg font-extrabold">
+                No pins found.
+              </Text>
+            </View>
           </View>
         ) : (
           <MasonryList pins={pins} />
         )}
 
-        {/* <MasonryList pins={pins} /> */}
+        <MasonryList pins={pins} />
       </SafeAreaView>
     </>
   );
