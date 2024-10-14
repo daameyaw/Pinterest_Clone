@@ -108,7 +108,7 @@ export default function SearchPinsScreen() {
           <MasonryList pins={pins} />
         )}
 
-        <MasonryList pins={pins} />
+        {/* <MasonryList pins={pins} /> */}
       </SafeAreaView>
     </>
   );
