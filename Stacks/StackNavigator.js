@@ -101,13 +101,13 @@ const StackNavigator = () => (
         headerShown: false,
       }}
     />
-    <Stack.Screen
+    {/* <Stack.Screen
       name="PinScreen2"
       component={PinScreen2}
       options={{
         headerShown: false,
       }}
-    />
+    /> */}
 
     <Stack.Screen
       name="CreatePins"
