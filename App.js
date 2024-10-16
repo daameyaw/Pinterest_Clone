@@ -63,7 +63,7 @@ function App() {
             <NavigationContainer>
               <StackNavigator />
             </NavigationContainer>
-            {/* <Toast config={toastConfig} /> */}
+            <Toast config={toastConfig} />
           </Provider>
         </QueryClientProvider>
       </GestureHandlerRootView>
